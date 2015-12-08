@@ -14,7 +14,7 @@ import configurator.IConfigurator;
 import dsl.Log;
 import exceptions.DSLException;
 
-public class Pipe {
+public class Pipeline {
 	
 	private final List<Step> steps = new LinkedList<>();
 	

@@ -23,9 +23,9 @@ import exceptions.DSLException;
 
 public class Step {
 	
-	private Pipe originPipe;
-	public Pipe getOriginPipe(){ return originPipe; }
-	public void setOriginPipe(Pipe originPipe){ this.originPipe = originPipe; }
+	private Pipeline originPipe;
+	public Pipeline getOriginPipe(){ return originPipe; }
+	public void setOriginPipe(Pipeline originPipe){ this.originPipe = originPipe; }
 	
 	private int order;
 	public int getOrder() { return order; }

@@ -7,7 +7,6 @@ import dsl.entities.Argument;
 import dsl.entities.Chain;
 import dsl.entities.Command;
 import dsl.entities.Output;
-import dsl.entities.Pipe;
 import dsl.entities.Tool;
 import dsl.managers.Support;
 import exceptions.DSLException;
@@ -159,7 +158,7 @@ public class Pipeline {
 		}
 		
 		
-		public Pipe build() throws DSLException {
+		public dsl.entities.Pipeline build() throws DSLException {
 			ctx.pipeline.build();
 			return ctx.pipeline;
 		}
@@ -179,7 +178,7 @@ public class Pipeline {
 	}
 	
 	public Pipeline(IRepository repository) {
-		this.ctx = new Context(repository, new Pipe());
+		this.ctx = new Context(repository, new dsl.entities.Pipeline());
 	}
 	
 	

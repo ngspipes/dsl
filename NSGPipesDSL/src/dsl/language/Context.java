@@ -8,7 +8,7 @@ import repository.IRepository;
 import configurator.IConfigurator;
 import descriptor.IToolDescriptor;
 import dsl.entities.Command;
-import dsl.entities.Pipe;
+import dsl.entities.Pipeline;
 import dsl.entities.Step;
 import dsl.entities.Tool;
 import exceptions.DSLException;
@@ -22,7 +22,7 @@ public class Context {
 	private final Map<Tool, Map<String, LinkedList<Command>>> commandsNames = new HashMap<>();
 
 	public final IRepository repository;
-	public final Pipe pipeline;
+	public final Pipeline pipeline;
 	
 	private Tool previousTool;
 	private Tool currentTool;
@@ -30,7 +30,7 @@ public class Context {
 	private Command currentCommand;
 
 	
-	public Context(IRepository repository, Pipe pipeline){
+	public Context(IRepository repository, Pipeline pipeline){
 		this.repository = repository;
 		this.pipeline = pipeline;
 	}
