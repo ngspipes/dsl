@@ -23,7 +23,7 @@ public class Log {
 		StringBuilder dir = new StringBuilder();
 		
 		dir.append(calendar.get(Calendar.YEAR)).append("_");
-		dir.append(calendar.get(Calendar.MONTH)).append("_");
+		dir.append(calendar.get(Calendar.MONTH)+1).append("_");
 		dir.append(calendar.get(Calendar.DAY_OF_MONTH)).append("_");
 		dir.append(calendar.get(Calendar.HOUR_OF_DAY)).append("_");
 		dir.append(calendar.get(Calendar.MINUTE)).append("_");
