@@ -24,4 +24,6 @@ public interface ICommandDescriptor {
 	
 	public IOutputDescriptor getOutput(String outputName);
 	
+	public int getPriority();
+	
 }

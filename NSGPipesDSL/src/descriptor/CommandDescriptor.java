@@ -18,9 +18,10 @@ public class CommandDescriptor implements ICommandDescriptor{
 	private final List<IOutputDescriptor> outputs;
 	private final Map<String, IArgumentDescriptor> args;
 	private final Map<String, IOutputDescriptor> otps;
+	private final int priority;
 	
 	public CommandDescriptor(String name, String command, String description, String argumentsProcessor, 
-							List<IArgumentDescriptor> arguments, List<IOutputDescriptor> outputs) {
+							List<IArgumentDescriptor> arguments, List<IOutputDescriptor> outputs, int priority) {
 		this.name = name;
 		this.command = command;
 		this.description = description;
@@ -29,6 +30,7 @@ public class CommandDescriptor implements ICommandDescriptor{
 		this.outputs = outputs;
 		this.args = new HashMap<>();
 		this.otps = new HashMap<>();
+		this.priority = priority;
 		
 		for(IArgumentDescriptor arg : arguments){
 			arg.setOriginCommand(this);
@@ -77,10 +79,13 @@ public class CommandDescriptor implements ICommandDescriptor{
 		return args.get(argumentName);
 	}
 
-
 	@Override
 	public IOutputDescriptor getOutput(String outputName) {
 		return otps.get(outputName);
+	}
+
+	public int getPriority(){
+		return priority;
 	}
 	
 }

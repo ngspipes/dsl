@@ -18,6 +18,7 @@ public class XMLCommandDescriptor extends CommandDescriptor{
 	public static final String OUTPUTS_XML_TAG = "outputs";
 	private static final String DESCRIPTION_XML_TAG = "description";
 	private static final String ARGUMENTS_PROCESSOR_XML_TAG = "argumentsProcessor";
+	private static final String PRIORITY_XML_TAG = "priority";
 
 	private static List<IArgumentDescriptor> getArguments(XMLObject xml) throws XMLException{
 		LinkedList<IArgumentDescriptor> arguments = new LinkedList<IArgumentDescriptor>();
@@ -51,7 +52,7 @@ public class XMLCommandDescriptor extends CommandDescriptor{
 
 	protected XMLCommandDescriptor(XMLObject xml, List<IArgumentDescriptor> args, List<IOutputDescriptor> outputs) throws XMLException{
 		super(xml.getString(NAME_XML_TAG), xml.getString(COMMAND_XML_TAG),
-				xml.getString(DESCRIPTION_XML_TAG), xml.getString(ARGUMENTS_PROCESSOR_XML_TAG), args, outputs);
+				xml.getString(DESCRIPTION_XML_TAG), xml.getString(ARGUMENTS_PROCESSOR_XML_TAG), args, outputs, xml.getInt(PRIORITY_XML_TAG));
 		this.xml = xml;
 	}
 
