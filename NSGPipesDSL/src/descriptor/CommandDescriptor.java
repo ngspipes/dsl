@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import utils.Utils;
+
 public class CommandDescriptor implements ICommandDescriptor{
 
 	private IToolDescriptor originTool;
@@ -86,6 +88,25 @@ public class CommandDescriptor implements ICommandDescriptor{
 
 	public int getPriority(){
 		return priority;
+	}
+	
+	@Override
+	public boolean equals(Object o){
+		if(o == null || !(o instanceof ICommandDescriptor))
+			return false;
+		
+		if(this == o)
+			return true;
+		
+		ICommandDescriptor other = (ICommandDescriptor)o;
+		
+		String myName = this.getName();
+		String otherName = other.getName();
+		
+		IToolDescriptor myTool = this.getOriginTool();
+		IToolDescriptor otherTool = other.getOriginTool();
+			
+		return Utils.equals(myName, otherName) && Utils.equals(myTool, otherTool);
 	}
 	
 }

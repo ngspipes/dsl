@@ -1,5 +1,7 @@
 package descriptor;
 
+import utils.Utils;
+
 public class OutputDescriptor implements IOutputDescriptor{
 
 	public static final String INDEPENDENT_TYPE = "independent";
@@ -54,4 +56,24 @@ public class OutputDescriptor implements IOutputDescriptor{
 	public String getInputName() {
 		return inputName;
 	}
+
+	@Override
+	public boolean equals(Object o){
+		if(o == null || !(o instanceof IOutputDescriptor))
+			return false;
+		
+		if(this == o)
+			return true;
+		
+		IOutputDescriptor other = (IOutputDescriptor)o;
+		
+		String myName = this.getName();
+		String otherName = other.getName();
+		
+		ICommandDescriptor myCommand = this.getOriginCommand();
+		ICommandDescriptor otherCommand = other.getOriginCommand();
+			
+		return Utils.equals(myName, otherName) && Utils.equals(myCommand, otherCommand);
+	}
+	
 }

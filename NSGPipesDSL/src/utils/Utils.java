@@ -11,4 +11,14 @@ public class Utils {
 		return sw.toString();
 	}
 	
+	public static boolean equals(Object a, Object b){
+		if((a==null && b!=null) || (a!=null && b==null))
+			return false;
+		
+		if(a == b)
+			return true;
+		
+		return a.equals(b);
+	}
+	
 }

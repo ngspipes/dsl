@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import repository.IRepository;
+import utils.Utils;
 
 public class ToolDescriptor implements IToolDescriptor {
 
@@ -83,4 +84,23 @@ public class ToolDescriptor implements IToolDescriptor {
 		return cmds.get(commandName);
 	}
 
+	@Override
+	public boolean equals(Object o){
+		if(o == null || !(o instanceof IToolDescriptor))
+			return false;
+		
+		if(this == o)
+			return true;
+		
+		IToolDescriptor other = (IToolDescriptor)o;
+		
+		String myName = this.getName();
+		String otherName = other.getName();
+		
+		IRepository myRepository = this.getOriginRepository();
+		IRepository otherRepository = other.getOriginRepository();
+			
+		return Utils.equals(myName, otherName) && Utils.equals(myRepository, otherRepository);
+	}
+	
 }

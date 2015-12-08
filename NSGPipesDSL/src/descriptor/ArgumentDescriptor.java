@@ -1,5 +1,7 @@
 package descriptor;
 
+import utils.Utils;
+
 public class ArgumentDescriptor implements IArgumentDescriptor{
 
 	private ICommandDescriptor originCommand;
@@ -43,6 +45,25 @@ public class ArgumentDescriptor implements IArgumentDescriptor{
 	
 	public int getOrder(){
 		return order;
+	}
+	
+	@Override
+	public boolean equals(Object o){
+		if(o == null || !(o instanceof IArgumentDescriptor))
+			return false;
+		
+		if(this == o)
+			return true;
+		
+		IArgumentDescriptor other = (IArgumentDescriptor)o;
+		
+		String myName = this.getName();
+		String otherName = other.getName();
+		
+		ICommandDescriptor myCommand = this.getOriginCommand();
+		ICommandDescriptor otherCommand = other.getOriginCommand();
+			
+		return Utils.equals(myName, otherName) && Utils.equals(myCommand, otherCommand);
 	}
 	
 }

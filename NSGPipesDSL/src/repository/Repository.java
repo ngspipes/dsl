@@ -3,10 +3,11 @@ package repository;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import utils.Cache;
+import utils.Utils;
 import configurator.IConfigurator;
 import descriptor.IToolDescriptor;
 import exceptions.RepositoryException;
-import utils.Cache;
 
 public abstract class Repository implements IRepository {
 	
@@ -119,16 +120,22 @@ public abstract class Repository implements IRepository {
 	}
 
 	@Override
-	public boolean equals(Object other){
-		if(other == null)
+	public boolean equals(Object o){
+		if(o == null || !(o instanceof IRepository))
 			return false;
 		
-		if(!(other instanceof IRepository))
-			return false;
+		if(this == o)
+			return true;
 		
-		IRepository otherRep = (IRepository)other;
+		IRepository other = (IRepository)o;
 		
-		return this.location.equals(otherRep.getLocation()) && this.type.equals(otherRep.getType());
+		String myType = this.getType();
+		String otherType = other.getType();
+		
+		String myLocation = this.getLocation();
+		String otherLocation = other.getLocation();
+		
+		return Utils.equals(myType, otherType) && Utils.equals(myLocation, otherLocation);
 	}
 	
 	protected abstract String loadToolLogo(String toolName) throws RepositoryException;
