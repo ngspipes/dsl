@@ -1,6 +1,5 @@
  package dsl.entities;
 
-import java.io.File;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -166,37 +165,10 @@ public class Pipeline {
 				reporter.reportTrace("Skipped -> " + step);
 			else if(step.getOrder()<=to){
 				reporter.reportTrace("Running -> " + step);
-				run(step, reporter);
+				step.run(reporter);
 			}else
 				break;	
 		}
-	}
-	
-	private void run(Step step, IProgressReporter reporter) throws DSLException{
-		step.run(reporter);
-		
-		reporter.reportTrace("Analysing outputs of Step " + step.getOrder());
-		
-		File output;
-		for(Chain chain : getChainsFromStep(step)){
-			output = new File(chain.getOutput().getValue());
-			if(!output.exists())
-				throw new DSLException("Step " + step.getOrder() + " didn't create output " + output.getAbsolutePath());
-		}
-	}
-	
-	private Collection<Chain> getChainsFromStep(Step step){
-		List<Chain> chainsFromStep = new LinkedList<>();
-		
-		Step chainStep;
-		for(Chain chain : chains){
-			chainStep = chain.getOutput().getOriginCommand().getOriginStep();
-			
-			if(step == chainStep)
-				chainsFromStep.add(chain);
-		}
-			
-		return chainsFromStep;
 	}
 	
 }
