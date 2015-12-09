@@ -65,8 +65,11 @@ public class CommandUtils {
 		
 		try {
 			int exitCode = p.waitFor();
-			if(exitCode != 0)
-				reporter.reportError("Command " + command + " finished with Exit Code = " + exitCode);
+			if(exitCode != 0){
+				String message = "Command " + command + " finished with Exit Code = " + exitCode;
+				Log.log(message);
+				reporter.reportError(message);
+			}
 		} catch (Exception ex) {
 			throw new DSLException("Error executing command " + command, ex);
 		}		
