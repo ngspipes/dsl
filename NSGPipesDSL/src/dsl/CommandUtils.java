@@ -66,7 +66,7 @@ public class CommandUtils {
 		try {
 			int exitCode = p.waitFor();
 			if(exitCode != 0)
-				throw new DSLException("Error executing command " + command + " .\nExit Code = " + exitCode);
+				reporter.reportError("Command " + command + " finished with Exit Code = " + exitCode);
 		} catch (Exception ex) {
 			throw new DSLException("Error executing command " + command, ex);
 		}		
