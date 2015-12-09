@@ -1,5 +1,6 @@
  package dsl.entities;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -144,19 +145,7 @@ public class Pipeline {
 			reporter.open();
 			reporter.reportTrace(" :: STARTED :: ");
 			
-			List<Step> orderedSteps = new LinkedList<Step>(steps);
-			Collections.sort(orderedSteps, (a,b)->a.getOrder()-b.getOrder());
-			
-			for(Step step : orderedSteps){
-				if(step.getOrder()<from)
-					reporter.reportTrace("Skipped -> " + step);
-				else if(step.getOrder()<=to){
-					reporter.reportTrace("Running -> " + step);
-					step.run(reporter);
-				}
-				else
-					break;	
-			}	
+			internalRun(reporter, from, to);
 		}catch(Exception ex){
 			reporter.reportError("Error : " + ex.getMessage());
 			Log.log(Utils.getStackTrace(ex));
@@ -166,6 +155,48 @@ public class Pipeline {
 			reporter.close();
 			Log.finish();
 		}
+	}
+	
+	private void internalRun(IProgressReporter reporter, int from, int to) throws DSLException{
+		List<Step> orderedSteps = new LinkedList<Step>(steps);
+		Collections.sort(orderedSteps, (a,b)->a.getOrder()-b.getOrder());
+		
+		for(Step step : orderedSteps){
+			if(step.getOrder()<from)
+				reporter.reportTrace("Skipped -> " + step);
+			else if(step.getOrder()<=to){
+				reporter.reportTrace("Running -> " + step);
+				run(step, reporter);
+			}else
+				break;	
+		}
+	}
+	
+	private void run(Step step, IProgressReporter reporter) throws DSLException{
+		step.run(reporter);
+		
+		reporter.reportTrace("Analysing outputs of Step " + step.getOrder());
+		
+		File output;
+		for(Chain chain : getChainsFromStep(step)){
+			output = new File(chain.getOutput().getValue());
+			if(!output.exists())
+				throw new DSLException("Step " + step.getOrder() + " didn't create output " + output.getAbsolutePath());
+		}
+	}
+	
+	private Collection<Chain> getChainsFromStep(Step step){
+		List<Chain> chainsFromStep = new LinkedList<>();
+		
+		Step chainStep;
+		for(Chain chain : chains){
+			chainStep = chain.getOutput().getOriginCommand().getOriginStep();
+			
+			if(step == chainStep)
+				chainsFromStep.add(chain);
+		}
+			
+		return chainsFromStep;
 	}
 	
 }
