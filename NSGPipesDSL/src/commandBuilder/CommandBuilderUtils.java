@@ -28,6 +28,6 @@ public class CommandBuilderUtils {
 
 	private static boolean isFileOrDirectory(Argument arg){
 		return arg.getType().equals(ArgumentValidator.FILE_TYPE_NAME)
-		|| arg.getType().equals(ArgumentValidator.OUT_DIRECTORY_TYPE_NAME);
+		|| arg.getType().equals(ArgumentValidator.DIRECTORY_TYPE_NAME);
 	}
 }

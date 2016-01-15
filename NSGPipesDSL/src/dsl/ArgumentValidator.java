@@ -28,9 +28,8 @@ public class ArgumentValidator {
 	public static final String INT_TYPE_NAME = "int";
 	public static final String STRING_TYPE_NAME = "string";
 	public static final String FILE_TYPE_NAME = "file";
-	public static final String FLOAT_TYPE_NAME = "float";
-	public static final String OUT_DIRECTORY_TYPE_NAME = "outputDir";
-	public static final String IN_DIRECTORY_TYPE_NAME = "inputDir";
+	public static final String DOUBLE_TYPE_NAME = "double";
+	public static final String DIRECTORY_TYPE_NAME = "directory";
 	
 	public static final Map<String, Validator> VALIDATORS;
 	
@@ -40,9 +39,8 @@ public class ArgumentValidator {
 		VALIDATORS.put(INT_TYPE_NAME, ArgumentValidator::validateInt);
 		VALIDATORS.put(STRING_TYPE_NAME, ArgumentValidator::validateString);
 		VALIDATORS.put(FILE_TYPE_NAME, ArgumentValidator::validateFile);
-		VALIDATORS.put(FLOAT_TYPE_NAME, ArgumentValidator::validateFloat);
-		VALIDATORS.put(OUT_DIRECTORY_TYPE_NAME, ArgumentValidator::validateDirectory);
-		VALIDATORS.put(IN_DIRECTORY_TYPE_NAME, ArgumentValidator::validateDirectory);
+		VALIDATORS.put(DOUBLE_TYPE_NAME, ArgumentValidator::validateFloat);
+		VALIDATORS.put(DIRECTORY_TYPE_NAME, ArgumentValidator::validateDirectory);
 	}
 	
 	private static void validateString(String value){}
