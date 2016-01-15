@@ -3,8 +3,10 @@ package dsl;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+import java.nio.charset.Charset;
 
-import jdk.internal.util.xml.impl.ReaderUTF8;
 import progressReporter.IProgressReporter;
 import exceptions.DSLException;
 import exceptions.ProgressReporterException;
@@ -26,7 +28,7 @@ public class CommandUtils {
 	}
 	
 	protected static void logStream(InputStream in, InternalReporter reporter) throws IOException, ProgressReporterException {
-		BufferedReader bf = new BufferedReader(new ReaderUTF8(in));
+		BufferedReader bf = new BufferedReader(new InputStreamReader(in, Charset.forName("UTF-8")));
 
 		String line;
 		StringBuilder sb = new StringBuilder();
