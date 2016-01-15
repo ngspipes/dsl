@@ -1,5 +1,6 @@
 package dsl.entities;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -76,6 +77,15 @@ public class Step {
 		reporter.reportInfo("Executing : " + cmd);
 		
 		CommandUtils.run(cmd, reporter);
+	}
+	
+	public void valideOutputs(Collection<Chain> chainsFromStep) throws DSLException {
+		File output;
+		for(Chain chain : chainsFromStep){
+			output = new File(commandBuilder.getOutputValue(chain.getOutput()));
+			if(!output.exists())
+				throw new DSLException("Step " + getOrder() + " didn't create output " + output.getAbsolutePath());
+		}
 	}
 	
 	private void validateArguments(Collection<Argument> arguments) throws ArgumentValidationException{

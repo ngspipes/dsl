@@ -2,6 +2,7 @@ package commandBuilder;
 
 import configurator.IConfigurator;
 import dsl.entities.Command;
+import dsl.entities.Output;
 import exceptions.CommandBuilderException;
 
 public class DockerUbuntuBuilder implements ICommandBuilder{
@@ -40,6 +41,11 @@ public class DockerUbuntuBuilder implements ICommandBuilder{
 		} catch(Exception e) {
 			throw new CommandBuilderException("Error running command " + command.getName(), e);
 		}
+	}
+
+	@Override
+	public String getOutputValue(Output output) {
+		return output.getValue().replace(SHARE_OUTPUT_DIRECTORY_PATH, VM_OUTPUT_DIRECTORY_PATH);
 	}
 	
 }

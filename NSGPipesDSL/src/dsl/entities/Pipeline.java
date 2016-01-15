@@ -165,10 +165,29 @@ public class Pipeline {
 				reporter.reportTrace("Skipped -> " + step);
 			else if(step.getOrder()<=to){
 				reporter.reportTrace("Running -> " + step);
-				step.run(reporter);
+				run(step, reporter);
 			}else
 				break;	
 		}
 	}
 	
+	private void run(Step step, IProgressReporter reporter) throws DSLException{
+		step.run(reporter);
+		reporter.reportTrace("Analysing outputs of Step " + step.getOrder());		
+		step.valideOutputs(getChainsFromStep(step));
+	}
+	
+	private Collection<Chain> getChainsFromStep(Step step){
+		List<Chain> chainsFromStep = new LinkedList<>();
+		
+		Step chainStep;
+		for(Chain chain : chains){
+			chainStep = chain.getOutput().getOriginCommand().getOriginStep();
+			
+			if(step == chainStep)
+				chainsFromStep.add(chain);
+		}
+			
+		return chainsFromStep;
+	}
 }
