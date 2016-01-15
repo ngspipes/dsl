@@ -8,8 +8,8 @@ import descriptor.ArgumentDescriptor;
 public class JSONArgumentDescriptor extends ArgumentDescriptor{
 
 	public static final String NAME_JSON_KEY = "name";
-	public static final String TYPE_JSON_KEY = "type";
-	public static final String REQUIRED_JSON_KEY = "required";
+	public static final String TYPE_JSON_KEY = "argumentType";
+	public static final String REQUIRED_JSON_KEY = "isRequired";
 	private static final String DESCRIPTION_JSON_KEY = "description";
 
 	protected final JSONObject json;

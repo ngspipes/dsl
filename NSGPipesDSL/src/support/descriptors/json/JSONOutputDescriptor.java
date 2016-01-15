@@ -11,7 +11,7 @@ public class JSONOutputDescriptor extends OutputDescriptor{
 	public static final String NAME_JSON_KEY = "name";
 	public static final String VALUE_JSON_KEY = "value";
 	private static final String DESCRIPTION_JSON_KEY = "description";
-	private static final String TYPE_JSON_KEY = "type";
+	private static final String TYPE_JSON_KEY = "outputType";
 	private static final String ARGUMENT_NAME_JSON_KEY = "argument_name";
 
 	private final JSONObject json;

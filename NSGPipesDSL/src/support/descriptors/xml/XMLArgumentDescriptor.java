@@ -7,8 +7,8 @@ import descriptor.ArgumentDescriptor;
 public class XMLArgumentDescriptor extends ArgumentDescriptor{
 
 	public static final String NAME_XML_TAG = "name";
-	public static final String TYPE_XML_TAG = "type";
-	public static final String REQUIRED_XML_TAG = "required";
+	public static final String TYPE_XML_TAG = "argumentType";
+	public static final String REQUIRED_XML_TAG = "isRequired";
 	private static final String DESCRIPTION_XML_TAG = "description";
 
 	protected final XMLObject xml;

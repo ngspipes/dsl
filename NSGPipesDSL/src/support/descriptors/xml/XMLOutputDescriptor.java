@@ -9,7 +9,7 @@ public class XMLOutputDescriptor extends OutputDescriptor {
 	public static final String NAME_XML_TAG = "name";
 	public static final String VALUE_XML_TAG = "value";
 	private static final String DESCRIPTION_XML_TAG = "description";
-	private static final String TYPE_XML_TAG = "type";
+	private static final String TYPE_XML_TAG = "outputType";
 	private static final String ARGUMENT_NAME_XML_TAG = "argument_name";
 
 	private final XMLObject xml;
