@@ -91,7 +91,7 @@ public class Command {
 			
 			type = out.getType();
 			if(type.equals(OutputDescriptor.FILE_DEPENDENT_TYPE) || type.equals(OutputDescriptor.DIRECTORY_DEPENDENT_TYPE)){
-				argument = arguments.get(out.getInputName());
+				argument = arguments.get(out.getArgumentName());
 				inputDependencies.get(argument).add(output);
 				outputDependency.put(output, argument);
 				argument.valueChangedEvent.addListner(output::onArgumentValueChange);

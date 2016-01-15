@@ -10,7 +10,7 @@ public interface IOutputDescriptor {
 	
 	public String getType();
 	
-	public String getInputName();
+	public String getArgumentName();
 
 	public String getValue();
 

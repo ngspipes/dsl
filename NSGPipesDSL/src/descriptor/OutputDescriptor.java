@@ -20,16 +20,16 @@ public class OutputDescriptor implements IOutputDescriptor{
 	private final String name;
 	private final String description;
 	private final String value;
-	private final String inputName;
+	private final String argumentName;
 	private final String type;
 	
 	public OutputDescriptor(String name, String description, String value,
-							String type, String inputName) {
+							String type, String argumentName) {
 		this.name = name;
 		this.description = description;
 		this.value = value;
 		this.type = type;
-		this.inputName = inputName;
+		this.argumentName = argumentName;
 	}
 
 	@Override
@@ -53,8 +53,8 @@ public class OutputDescriptor implements IOutputDescriptor{
 	}
 
 	@Override
-	public String getInputName() {
-		return inputName;
+	public String getArgumentName() {
+		return argumentName;
 	}
 
 	@Override

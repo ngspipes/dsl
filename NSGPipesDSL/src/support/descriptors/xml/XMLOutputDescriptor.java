@@ -10,14 +10,14 @@ public class XMLOutputDescriptor extends OutputDescriptor {
 	public static final String VALUE_XML_TAG = "value";
 	private static final String DESCRIPTION_XML_TAG = "description";
 	private static final String TYPE_XML_TAG = "type";
-	private static final String INPUT_NAME_XML_TAG = "input_name";
+	private static final String ARGUMENT_NAME_XML_TAG = "argument_name";
 
 	private final XMLObject xml;
 
 	public XMLOutputDescriptor(XMLObject xml) throws XMLException {
 		super(xml.getString(NAME_XML_TAG), xml.getString(DESCRIPTION_XML_TAG),  
 				OutputDescriptor.getValue(xml.getString(TYPE_XML_TAG), xml.getString(VALUE_XML_TAG)), 
-				xml.getString(TYPE_XML_TAG), xml.getString(INPUT_NAME_XML_TAG));
+				xml.getString(TYPE_XML_TAG), xml.getString(ARGUMENT_NAME_XML_TAG));
 
 		this.xml = xml;
 	}

@@ -48,8 +48,8 @@ public class Output {
 		return descriptor.getName();
 	}
 	
-	public String getInputName() {
-		return descriptor.getInputName();
+	public String getArgumentName() {
+		return descriptor.getArgumentName();
 	}
 
 	public String getType() {
