@@ -12,7 +12,6 @@ import exceptions.RepositoryException;
 public class GithubRepository extends Repository {
 	
 	private static final String CONNECTION_BASE_URI = "https://raw.githubusercontent.com"; 
-	private static final String CONFIGURATOR_NAME= "Config";
 	private static final String LOGO_FILE_NAME = "Logo.png";
 	
 	public static <T> T getObject(String uri, IFactory<T> factory) throws RepositoryException {
@@ -66,12 +65,12 @@ public class GithubRepository extends Repository {
 	@Override
 	protected Collection<String> loadConfiguratorsNameFor(String toolName) throws RepositoryException {
 		return RemoteRepository.getStringCollection(this.connectionUri + "/" + toolName +  
-													"/configurators.json", "configuratorsName");
+													"/configurators.json", "configuratorsFileName");
 	}
 
 	@Override
 	protected IConfigurator loadConfigurationFor(String toolName, String configuratorName) throws RepositoryException {
-		String configuratorUri = this.connectionUri + "/"  + toolName +  "/" + configuratorName + CONFIGURATOR_NAME + ".json";
+		String configuratorUri = this.connectionUri + "/"  + toolName +  "/" + configuratorName + ".json";
 
 		return getObject(configuratorUri, Support::getConfigurator);
 	}

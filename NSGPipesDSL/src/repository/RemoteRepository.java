@@ -49,10 +49,6 @@ public class RemoteRepository extends Repository {
 	}
 	
 	
-	
-	 
-	private static final String CONFIGURATOR_NAME= "Config";
-	
 	public static HttpURLConnection getConnection(String url)throws IOException{
 		return (HttpURLConnection) new URL(url).openConnection();
 	}
@@ -141,13 +137,13 @@ public class RemoteRepository extends Repository {
 	
 	@Override
 	protected Collection<String> loadConfiguratorsNameFor(String toolName) throws RepositoryException {
-		return getStringCollection(this.location + "/" + toolName +  "/configurators", "configuratorsName");
+		return getStringCollection(this.location + "/" + toolName +  "/configurators", "configuratorsFileName");
 	}
 
 	
 	@Override
 	protected IConfigurator loadConfigurationFor(String toolName, String configuratorName) throws RepositoryException {
-		String configuratorUri = this.location + "/"  + toolName + "/configurators/" + configuratorName + CONFIGURATOR_NAME;
+		String configuratorUri = this.location + "/"  + toolName + "/configurators/" + configuratorName;
 
 		return getObject(configuratorUri, Support::getConfigurator);
 	}
