@@ -18,7 +18,7 @@ import descriptor.IToolDescriptor;
 import dsl.managers.Support;
 import exceptions.RepositoryException;
 
-public class RemoteRepository extends Repository {
+public class UriBasedRepository extends Repository {
 
 	//////////////////////////////////////////////////////////////////////////////////////////
 	//																						//
@@ -101,7 +101,7 @@ public class RemoteRepository extends Repository {
 		}
 	}
 
-	public RemoteRepository(String repositoryUri){
+	public UriBasedRepository(String repositoryUri){
 		super(repositoryUri, Support.REPOSITORY_REMOTE);
 	}
 

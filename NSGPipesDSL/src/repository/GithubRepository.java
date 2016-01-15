@@ -3,7 +3,7 @@ package repository;
 import java.net.HttpURLConnection;
 import java.util.Collection;
 
-import repository.RemoteRepository.IFactory;
+import repository.UriBasedRepository.IFactory;
 import configurator.IConfigurator;
 import descriptor.IToolDescriptor;
 import dsl.managers.Support;
@@ -16,8 +16,8 @@ public class GithubRepository extends Repository {
 	
 	public static <T> T getObject(String uri, IFactory<T> factory) throws RepositoryException {
 		try {
-			HttpURLConnection connection = RemoteRepository.getConnection(uri);
-			String content = RemoteRepository.readStream(connection);
+			HttpURLConnection connection = UriBasedRepository.getConnection(uri);
+			String content = UriBasedRepository.readStream(connection);
 
 			return factory.getObj("json", content);
 		} catch (Exception e) {
@@ -49,7 +49,7 @@ public class GithubRepository extends Repository {
 
 	@Override
 	protected Collection<String> loadToolsName() throws RepositoryException {
-		return RemoteRepository.getStringCollection(this.connectionUri + "/tools.json", "toolsName");
+		return UriBasedRepository.getStringCollection(this.connectionUri + "/tools.json", "toolsName");
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class GithubRepository extends Repository {
 
 	@Override
 	protected Collection<String> loadConfiguratorsNameFor(String toolName) throws RepositoryException {
-		return RemoteRepository.getStringCollection(this.connectionUri + "/" + toolName +  
+		return UriBasedRepository.getStringCollection(this.connectionUri + "/" + toolName +  
 													"/configurators.json", "configuratorsFileName");
 	}
 
