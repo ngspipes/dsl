@@ -7,5 +7,5 @@ public class CommandBuilder implements ICommandBuilder {
 
 	@Override
 	public void build(Command command) throws CommandBuilderException {}
-		
+
 }
