@@ -36,80 +36,80 @@ public class ArgumentsProcessorManager {
 	}
 	
 	// Format: []
-	@ProcessorNameAnnotation(name = Support.PROCESSOR0_NAME)
-	public static String processor0(List<Argument> args){
+	@ProcessorNameAnnotation(name = Support.PROCESSOR_DUMMY_NAME)
+	public static String dummy(List<Argument> args){
 		return "";
 	}
 
 	// Format: [value value value]
-	@ProcessorNameAnnotation(name = Support.PROCESSOR1_NAME)
-	public static String processor1(List<Argument> args){
+	@ProcessorNameAnnotation(name = Support.PROCESSOR_VALUES_SEPARATED_BY_SPACE_NAME)
+	public static String valuesSeparatedBySpace(List<Argument> args){
 		return process(args, (arg)-> arg.getValue() + " ");
 	}
 	
 	// Format: [name=value name=value name=value]
-	@ProcessorNameAnnotation(name = Support.PROCESSOR2_NAME)
-	public static String processor2(List<Argument> args){
+	@ProcessorNameAnnotation(name = Support.PROCESSOR_NAME_VALUES_SEPARATED_BY_EQUAL_NAME)
+	public static String nameValuesSeparatedByEqual(List<Argument> args){
 		return process(args, (arg)-> arg.getName()+"="+arg.getValue()+" ");
 	}	
 
 	// Format: [name:value name:value name:value]
-	@ProcessorNameAnnotation(name = Support.PROCESSOR3_NAME)
-	public static String processor3(List<Argument> args){
+	@ProcessorNameAnnotation(name = Support.PROCESSOR_NAME_VALUES_SEPARATED_BY_COLON_NAME)
+	public static String nameValuesSeparatedByColon(List<Argument> args){
 		return process(args, (arg)-> arg.getName()+":"+arg.getValue()+" "); 
 	}
 	
 	// Format: [name-value name-value name-value]
-	@ProcessorNameAnnotation(name = Support.PROCESSOR4_NAME)
-	public static String processor4(List<Argument> args){
+	@ProcessorNameAnnotation(name = Support.PROCESSOR_NAME_VALUES_SEPARATED_BY_HYPHEN_NAME)
+	public static String nameValuesSeparatedByHyphen(List<Argument> args){
 		return process(args, (arg)-> arg.getName()+"-"+arg.getValue()+" "); 
 	}
 
 	// Format: [name value name value name value]
-	@ProcessorNameAnnotation(name = Support.PROCESSOR5_NAME)
-	public static String processor5(List<Argument> args){
+	@ProcessorNameAnnotation(name = Support.PROCESSOR_NAME_VALUES_SEPARATED_BY_SPACE_NAME)
+	public static String nameValuesSeparatedBySpace(List<Argument> args){
 		return process(args, (arg)-> arg.getName()+" "+arg.getValue()+" "); 
 	}
 
 	// Format: [value:value:value]
-	@ProcessorNameAnnotation(name = Support.PROCESSOR6_NAME)
-	public static String processor6(List<Argument> args){ 
+	@ProcessorNameAnnotation(name = Support.PROCESSOR_VALUES_SEPARATED_BY_COLON_NAME)
+	public static String valuesSeparatedByColon(List<Argument> args){ 
 		return processEndControled(args, (arg)->arg.getValue()+":", (arg)->arg.getValue());
 	}
 
 	// Format: [value|value|value]
-	@ProcessorNameAnnotation(name = Support.PROCESSOR7_NAME)
-	public static String processor7(List<Argument> args){ 
+	@ProcessorNameAnnotation(name = Support.PROCESSOR_VALUES_SEPARATED_BY_VERTICAL_BAR_NAME)
+	public static String valuesSeparatedByVerticalBar(List<Argument> args){ 
 		return processEndControled(args, (arg)->arg.getValue()+"|", (arg)->arg.getValue());
 	}
 
 	// Format: [value-value-value]
-	@ProcessorNameAnnotation(name = Support.PROCESSOR8_NAME)
-	public static String processor8(List<Argument> args){ 
+	@ProcessorNameAnnotation(name = Support.PROCESSOR_VALUES_SEPARATED_BY_HYPHEN_NAME)
+	public static String valuesSeparatedByHyphen(List<Argument> args){ 
 		return processEndControled(args, (arg)->arg.getValue()+"-", (arg)->arg.getValue());
 	}
 
 	// Format: [value/value/value]
-	@ProcessorNameAnnotation(name = Support.PROCESSOR9_NAME)
-	public static String processor9(List<Argument> args){ 
+	@ProcessorNameAnnotation(name = Support.PROCESSOR_VALUES_SEPARATED_BY_SLASH_NAME)
+	public static String valuesSeparatedBySlash(List<Argument> args){ 
 		return processEndControled(args, (arg)->arg.getValue()+"/", (arg)->arg.getValue());
 	}
 
 	// Format: [value,value,value]
-	@ProcessorNameAnnotation(name = Support.PROCESSOR10_NAME)
-	public static String processor10(List<Argument> args){ 
+	@ProcessorNameAnnotation(name = Support.PROCESSOR_VALUES_SEPARATED_BY_COMMA_NAME)
+	public static String valuesSeparatedByComma(List<Argument> args){ 
 		return processEndControled(args, (arg)->arg.getValue()+",", (arg)->arg.getValue());
 	}
 	
 	// Format: ["TRIMMOMATIC STYLE"]
 	@ProcessorNameAnnotation(name = Support.PROCESSOR_TRIMMOMATIC_NAME)
-	public static String processorTrimmomatic(List<Argument> args){ 
+	public static String trimmomatic(List<Argument> args){ 
 		return Trimmomatic.process(args);
 	}
 	
 	// Format: ["VELVETG STYLE"]
 	@ProcessorNameAnnotation(name = Support.PROCESSOR_VELVETG_NAME)
-	public static String processorVelvetG(List<Argument> args){ 
+	public static String velvetG(List<Argument> args){ 
 		return process(args, (arg)-> { 
 									if(!arg.getName().equals(Support.VELVET_OUTPUT_DIRECTORY_ARGUMENT_NAME))
 										return arg.getName()+" "+arg.getValue()+" ";

@@ -107,19 +107,19 @@ public class Support {
 
 
 	//ARGUMENTS PROCESSOR
-	public static final String PROCESSOR0_NAME = "processor0";
-	public static final String PROCESSOR1_NAME = "processor1";
-	public static final String PROCESSOR2_NAME = "processor2";
-	public static final String PROCESSOR3_NAME = "processor3";
-	public static final String PROCESSOR4_NAME = "processor4";
-	public static final String PROCESSOR5_NAME = "processor5";
-	public static final String PROCESSOR6_NAME = "processor6";
-	public static final String PROCESSOR7_NAME = "processor7";
-	public static final String PROCESSOR8_NAME = "processor8";
-	public static final String PROCESSOR9_NAME = "processor9";
-	public static final String PROCESSOR10_NAME = "processor10";
-	public static final String PROCESSOR_TRIMMOMATIC_NAME = "processorTrimmomatic";
-	public static final String PROCESSOR_VELVETG_NAME = "processorVelvetG";
+	public static final String PROCESSOR_DUMMY_NAME = "dummy";
+	public static final String PROCESSOR_VALUES_SEPARATED_BY_SPACE_NAME = "values_separated_by_space";
+	public static final String PROCESSOR_NAME_VALUES_SEPARATED_BY_EQUAL_NAME = "name_values_separated_by_equal";
+	public static final String PROCESSOR_NAME_VALUES_SEPARATED_BY_COLON_NAME = "name_values_separated_by_colon";
+	public static final String PROCESSOR_NAME_VALUES_SEPARATED_BY_HYPHEN_NAME = "name_values_separated_by_hyphen";
+	public static final String PROCESSOR_NAME_VALUES_SEPARATED_BY_SPACE_NAME = "name_values_separated_by_space";
+	public static final String PROCESSOR_VALUES_SEPARATED_BY_COLON_NAME = "values_separated_by_colon";
+	public static final String PROCESSOR_VALUES_SEPARATED_BY_VERTICAL_BAR_NAME = "values_separated_by_vertical_bar";
+	public static final String PROCESSOR_VALUES_SEPARATED_BY_HYPHEN_NAME = "values_separated_by_hyphen";
+	public static final String PROCESSOR_VALUES_SEPARATED_BY_SLASH_NAME = "values_separated_by_slash";
+	public static final String PROCESSOR_VALUES_SEPARATED_BY_COMMA_NAME = "values_separated_by_comma";
+	public static final String PROCESSOR_TRIMMOMATIC_NAME = "trimmomatic";
+	public static final String PROCESSOR_VELVETG_NAME = "velvetG";
 	public static final String VELVET_OUTPUT_DIRECTORY_ARGUMENT_NAME = "output_directory";
 
 	@SuppressWarnings("unchecked")
