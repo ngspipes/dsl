@@ -71,7 +71,7 @@ public class Step {
 
 		List<Argument> arguments = arrangeArguments();
 
-		String cmd = command.getCommand() + " " + command.getProcessor().process(arguments);
+		String cmd = command.getCommand() + " " + command.getComposer().compose(arguments);
 
 		reporter.reportInfo("Executing : " + cmd);
 

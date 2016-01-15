@@ -18,7 +18,7 @@ public class JSONCommandDescriptor extends CommandDescriptor{
 	public static final String ARGUMENTS_JSON_KEY = "arguments";
 	public static final String OUTPUTS_JSON_KEY = "outputs";
 	private static final String DESCRIPTION_JSON_KEY = "description";
-	private static final String ARGUMENTS_PROCESSOR_JSON_KEY = "argumentsProcessor";
+	private static final String ARGUMENTS_COMPOSER_JSON_KEY = "argumentsComposer";
 	private static final String PRIORITY_JSON_KEY = "priority";
 
 	private static List<IArgumentDescriptor> getArguments(JSONObject json) throws JSONException{
@@ -53,7 +53,7 @@ public class JSONCommandDescriptor extends CommandDescriptor{
 
 	protected JSONCommandDescriptor(JSONObject json, List<IArgumentDescriptor> args, List<IOutputDescriptor> outputs) throws JSONException{
 		super(json.getString(NAME_JSON_KEY), json.getString(COMMAND_JSON_KEY),json.getString(DESCRIPTION_JSON_KEY), 
-				json.getString(ARGUMENTS_PROCESSOR_JSON_KEY), args, outputs, json.getInt(PRIORITY_JSON_KEY));
+				json.getString(ARGUMENTS_COMPOSER_JSON_KEY), args, outputs, json.getInt(PRIORITY_JSON_KEY));
 		this.json = json;
 	}
 

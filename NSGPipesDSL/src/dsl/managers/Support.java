@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.Map;
 
 import repository.IRepository;
-import argmentsProcessor.IArgumentsProcessor;
+import argmentsComposer.IArgumentsComposer;
 
 import commandBuilder.ICommandBuilder;
 
 import configurator.IConfigurator;
 import descriptor.IToolDescriptor;
 import dsl.entities.Argument;
-import dsl.managers.ArgumentsProcessorManager.ProcessorNameAnnotation;
+import dsl.managers.ArgumentsComposerManager.ComposerNameAnnotation;
 import exceptions.CommandBuilderException;
 import exceptions.ConfiguratorException;
 import exceptions.DSLException;
@@ -32,7 +32,7 @@ public class Support {
 	private static final Map<String, ConfiguratorFactory> CONFIGURATOR_FACTORIES = new HashMap<>();
 	public static final Map<String, RepositoryFactory> REPOSITORY_FACTORIES = new HashMap<>();
 	private static final Map<String, ToolDescriptorFactory> TOOL_DESCRIPTOR_FACTORIES = new HashMap<>();
-	public static final Map<String, IArgumentsProcessor> PROCESSORS = new HashMap<>();
+	public static final Map<String, IArgumentsComposer> COMPOSERS = new HashMap<>();
 	public static final Map<String, CommanBuilderFactory> COMMAND_BUILDER_FACTORIES = new HashMap<>();
 	
 	
@@ -40,7 +40,7 @@ public class Support {
 		loadConfiguratorFactories();
 		loadRepositoryFactories();
 		loadToolDescriptorFactories();
-		loadArgumentsProcessors();
+		loadArgumentsComposers();
 		loadCommandBuilderFactories();
 		
 		SUPPORTED_TYPES.add(JSON_TYPE);
@@ -106,58 +106,58 @@ public class Support {
 
 
 
-	//ARGUMENTS PROCESSOR
-	public static final String PROCESSOR_DUMMY_NAME = "dummy";
-	public static final String PROCESSOR_VALUES_SEPARATED_BY_SPACE_NAME = "values_separated_by_space";
-	public static final String PROCESSOR_NAME_VALUES_SEPARATED_BY_EQUAL_NAME = "name_values_separated_by_equal";
-	public static final String PROCESSOR_NAME_VALUES_SEPARATED_BY_COLON_NAME = "name_values_separated_by_colon";
-	public static final String PROCESSOR_NAME_VALUES_SEPARATED_BY_HYPHEN_NAME = "name_values_separated_by_hyphen";
-	public static final String PROCESSOR_NAME_VALUES_SEPARATED_BY_SPACE_NAME = "name_values_separated_by_space";
-	public static final String PROCESSOR_VALUES_SEPARATED_BY_COLON_NAME = "values_separated_by_colon";
-	public static final String PROCESSOR_VALUES_SEPARATED_BY_VERTICAL_BAR_NAME = "values_separated_by_vertical_bar";
-	public static final String PROCESSOR_VALUES_SEPARATED_BY_HYPHEN_NAME = "values_separated_by_hyphen";
-	public static final String PROCESSOR_VALUES_SEPARATED_BY_SLASH_NAME = "values_separated_by_slash";
-	public static final String PROCESSOR_VALUES_SEPARATED_BY_COMMA_NAME = "values_separated_by_comma";
-	public static final String PROCESSOR_TRIMMOMATIC_NAME = "trimmomatic";
-	public static final String PROCESSOR_VELVETG_NAME = "velvetG";
+	//ARGUMENTS COMPOSER
+	public static final String COMPOSER_DUMMY_NAME = "dummy";
+	public static final String COMPOSER_VALUES_SEPARATED_BY_SPACE_NAME = "values_separated_by_space";
+	public static final String COMPOSER_NAME_VALUES_SEPARATED_BY_EQUAL_NAME = "name_values_separated_by_equal";
+	public static final String COMPOSER_NAME_VALUES_SEPARATED_BY_COLON_NAME = "name_values_separated_by_colon";
+	public static final String COMPOSER_NAME_VALUES_SEPARATED_BY_HYPHEN_NAME = "name_values_separated_by_hyphen";
+	public static final String COMPOSER_NAME_VALUES_SEPARATED_BY_SPACE_NAME = "name_values_separated_by_space";
+	public static final String COMPOSER_VALUES_SEPARATED_BY_COLON_NAME = "values_separated_by_colon";
+	public static final String COMPOSER_VALUES_SEPARATED_BY_VERTICAL_BAR_NAME = "values_separated_by_vertical_bar";
+	public static final String COMPOSER_VALUES_SEPARATED_BY_HYPHEN_NAME = "values_separated_by_hyphen";
+	public static final String COMPOSER_VALUES_SEPARATED_BY_SLASH_NAME = "values_separated_by_slash";
+	public static final String COMPOSER_VALUES_SEPARATED_BY_COMMA_NAME = "values_separated_by_comma";
+	public static final String COMPOSER_TRIMMOMATIC_NAME = "trimmomatic";
+	public static final String COMPOSER_VELVETG_NAME = "velvetG";
 	public static final String VELVET_OUTPUT_DIRECTORY_ARGUMENT_NAME = "output_directory";
 
 	@SuppressWarnings("unchecked")
-	private static boolean isProcessor(Method method){
+	private static boolean isComposer(Method method){
 		// Is static
 		// Returns String
 		// Recieves only 1 argument of type List<Argument>
-		// Is anotated with ProcessorNameAnnotation
+		// Is anotated with ComposerNameAnnotation
 		return Modifier.isStatic(method.getModifiers()) && 
 				method.getReturnType().isAssignableFrom(String.class) &&
 				method.getParameters().length==1 &&
 				List.class.isAssignableFrom(method.getParameters()[0].getType()) &&
 				Argument.class.isAssignableFrom((Class<Argument>)((ParameterizedType)(method.getParameters()[0].getParameterizedType())).getActualTypeArguments()[0]) && 
-				method.getAnnotation(ProcessorNameAnnotation.class) != null;
+				method.getAnnotation(ComposerNameAnnotation.class) != null;
 	}
 
-	private static IArgumentsProcessor getProcessor(Method method){
+	private static IArgumentsComposer getComposer(Method method){
 		return (args)->{
 			try{
 				return (String) method.invoke(null, new Object[]{args});	
 			}catch(Exception e){
-				throw new DSLException("Error invoking processor!", e);
+				throw new DSLException("Error invoking composer!", e);
 			}
 		};
 	}
 
-	private static String getProcessorName(Method method){
-		return method.getAnnotation(ProcessorNameAnnotation.class).name();
+	private static String getComposerName(Method method){
+		return method.getAnnotation(ComposerNameAnnotation.class).name();
 	}
 
-	private static void loadArgumentsProcessors(){
-		for(Method method : ArgumentsProcessorManager.class.getMethods())
-			if(isProcessor(method))
-				PROCESSORS.put(getProcessorName(method), getProcessor(method));	
+	private static void loadArgumentsComposers(){
+		for(Method method : ArgumentsComposerManager.class.getMethods())
+			if(isComposer(method))
+				COMPOSERS.put(getComposerName(method), getComposer(method));	
 	}
 
-	public static IArgumentsProcessor getProcessor(String name){
-		return PROCESSORS.get(name);
+	public static IArgumentsComposer getComposer(String name){
+		return COMPOSERS.get(name);
 	}
 
 

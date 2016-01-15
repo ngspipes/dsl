@@ -14,7 +14,7 @@ public interface ICommandDescriptor {
 	
 	public String getDescription();
 	
-	public String getArgumentsProcessor();
+	public String getArgumentsComposer();
 	
 	public List<IArgumentDescriptor> getArguments();
 	

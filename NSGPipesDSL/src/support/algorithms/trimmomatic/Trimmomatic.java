@@ -54,20 +54,20 @@ public class Trimmomatic {
 		ARGS_GROUP.put("minlen length", MINLEN_GROUP_NAME);	
 	}
 	
-	public static String process(List<Argument> args){
+	public static String compose(List<Argument> args){
 		Map<String, Map<String, Argument>> arguments = convertToGroupMap(args);
 		
-		StringBuilder process = new StringBuilder(getWithoutName(arguments)).append(" ");
+		StringBuilder compose = new StringBuilder(getWithoutName(arguments)).append(" ");
 				
-		process.append(get(arguments, ILLUMINACLIP_GROUP_NAME)).append(" ");
-		process.append(get(arguments, SLIDINGWINDOW_GROUP_NAME)).append(" ");
-		process.append(get(arguments, LEADING_GROUP_NAME)).append(" ");
-		process.append(get(arguments, TRAILING_GROUP_NAME)).append(" ");
-		process.append(get(arguments, CROP_GROUP_NAME)).append(" ");
-		process.append(get(arguments, HEADCROP_GROUP_NAME)).append(" ");
-		process.append(get(arguments, MINLEN_GROUP_NAME)).append(" ");
+		compose.append(get(arguments, ILLUMINACLIP_GROUP_NAME)).append(" ");
+		compose.append(get(arguments, SLIDINGWINDOW_GROUP_NAME)).append(" ");
+		compose.append(get(arguments, LEADING_GROUP_NAME)).append(" ");
+		compose.append(get(arguments, TRAILING_GROUP_NAME)).append(" ");
+		compose.append(get(arguments, CROP_GROUP_NAME)).append(" ");
+		compose.append(get(arguments, HEADCROP_GROUP_NAME)).append(" ");
+		compose.append(get(arguments, MINLEN_GROUP_NAME)).append(" ");
 		
-		return process.toString();
+		return compose.toString();
 	}
 	
 	private static Map<String, Map<String, Argument>> convertToGroupMap(List<Argument> args){

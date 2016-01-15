@@ -15,19 +15,19 @@ public class CommandDescriptor implements ICommandDescriptor{
 	private final String name;
 	private final String command;
 	private final String description;
-	private final String argumentsProcessor;
+	private final String argumentsComposer;
 	private final List<IArgumentDescriptor> arguments;
 	private final List<IOutputDescriptor> outputs;
 	private final Map<String, IArgumentDescriptor> args;
 	private final Map<String, IOutputDescriptor> otps;
 	private final int priority;
 	
-	public CommandDescriptor(String name, String command, String description, String argumentsProcessor, 
+	public CommandDescriptor(String name, String command, String description, String argumentsComposer, 
 							List<IArgumentDescriptor> arguments, List<IOutputDescriptor> outputs, int priority) {
 		this.name = name;
 		this.command = command;
 		this.description = description;
-		this.argumentsProcessor = argumentsProcessor;
+		this.argumentsComposer = argumentsComposer;
 		this.arguments = arguments;
 		this.outputs = outputs;
 		this.args = new HashMap<>();
@@ -72,8 +72,8 @@ public class CommandDescriptor implements ICommandDescriptor{
 	}
 	
 	@Override
-	public String getArgumentsProcessor(){
-		return argumentsProcessor;
+	public String getArgumentsComposer(){
+		return argumentsComposer;
 	}
 	
 	@Override

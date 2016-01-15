@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import argmentsProcessor.IArgumentsProcessor;
+import argmentsComposer.IArgumentsComposer;
 import descriptor.IArgumentDescriptor;
 import descriptor.ICommandDescriptor;
 import descriptor.IOutputDescriptor;
@@ -25,8 +25,8 @@ public class Command {
 	private final ICommandDescriptor descriptor;
 	public ICommandDescriptor getDescriptor(){ return descriptor; }
 	
-	private final IArgumentsProcessor processor;
-	public IArgumentsProcessor getProcessor(){ return processor; }
+	private final IArgumentsComposer composer;
+	public IArgumentsComposer getComposer(){ return composer; }
 
 	private final List<Argument> args;
 	public List<Argument> getArguments(){ return args; }
@@ -56,7 +56,7 @@ public class Command {
 	public Command(ICommandDescriptor descriptor,Tool originTool){
 		this.originTool = originTool;
 		this.descriptor = descriptor;
-		this.processor = Support.getProcessor(descriptor.getArgumentsProcessor());
+		this.composer = Support.getComposer(descriptor.getArgumentsComposer());
 		this.name = descriptor.getName();
 		this.command = descriptor.getCommand();
 		this.args = new LinkedList<>();
