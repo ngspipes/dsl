@@ -65,7 +65,7 @@ public class GithubRepository extends Repository {
 	@Override
 	protected Collection<String> loadConfiguratorsNameFor(String toolName) throws RepositoryException {
 		return UriBasedRepository.getStringCollection(this.connectionUri + "/" + toolName +  
-													"/configurators.json", "configuratorsFileName");
+													"/Configurators.json", "configuratorsFileName");
 	}
 
 	@Override
