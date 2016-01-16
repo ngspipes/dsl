@@ -49,7 +49,7 @@ public class GithubRepository extends Repository {
 
 	@Override
 	protected Collection<String> loadToolsName() throws RepositoryException {
-		return UriBasedRepository.getStringCollection(this.connectionUri + "/tools.json", "toolsName");
+		return UriBasedRepository.getStringCollection(this.connectionUri + "/Tools.json", "toolsName");
 	}
 
 	@Override
