@@ -71,12 +71,12 @@ public class Support {
 		public IRepository create(String location) throws RepositoryException;
 	}
 
-	public static final String REPOSITORY_REMOTE = "Remote";
+	public static final String REPOSITORY_URI_BASED = "UriBased";
 	public static final String REPOSITORY_LOCAL = "Local";
 	public static final String REPOSITORY_GITHUB = "Github";
 
 	private static void loadRepositoryFactories(){
-		REPOSITORY_FACTORIES.put(REPOSITORY_REMOTE, RepositoryManager::createRemote);
+		REPOSITORY_FACTORIES.put(REPOSITORY_URI_BASED, RepositoryManager::createUriBased);
 		REPOSITORY_FACTORIES.put(REPOSITORY_LOCAL, RepositoryManager::createLocal);   
 		REPOSITORY_FACTORIES.put(REPOSITORY_GITHUB, RepositoryManager::createGithub);    	
 	}

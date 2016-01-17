@@ -7,28 +7,13 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import utils.IO;
 import configurator.IConfigurator;
 import descriptor.IToolDescriptor;
 import dsl.managers.Support;
 import exceptions.RepositoryException;
-import utils.IO;
 
 public class LocalRepository extends Repository {
-	
-    //////////////////////////////////////////////////////////////////////////////////////////////////
-    //																								//
-    //                           			*LOCAL* 				                        		//
-    //																								//
-    // 			Repository is a folder with tools inside											//
-    //																								//
-    //			A tool e a folder with the flowing artifacts inside									//
-    //				- File with name Descriptor and extension .json or .xml							//
-	//				- File/s with name starting with Configurator with extension .json or .xml		//
-    //				- (Optional) an image with tool logo and name logo.png							//
-    //																								//	
-    //																								//
-    //////////////////////////////////////////////////////////////////////////////////////////////////
-
 	
 	private static File getDescriptor(File tool) throws RepositoryException{
     	File[] descriptor = tool.listFiles((file)-> !file.isDirectory() && getFileName(file).equals(DESCRIPTOR_NAME));

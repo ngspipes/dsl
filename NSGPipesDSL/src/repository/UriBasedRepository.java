@@ -20,29 +20,6 @@ import exceptions.RepositoryException;
 
 public class UriBasedRepository extends Repository {
 
-	//////////////////////////////////////////////////////////////////////////////////////////
-	//																						//
-	//                           			*REMOTE* 				                        //
-	//																						//
-	// 			http://repositoryUri -> Returns a JSON[] with name of all tools				//
-	//																						//
-	//			http://repositoryUri/toolName/descriptor -> Returns the toolDescriptor		//
-	//			with toolName and a content type header with the descriptor type 			//
-	//			(JSON(application/json) or XML(application/xml))							//
-	//																						//
-	//			http://repositoryUri/toolName/configurators -> Returns a JSON[] with 		//
-	//			name of all configurators for toolName										//				
-	//																						//
-	//			http://repositoryUri/toolName/configurators/configuratorName -> Returns		//
-	//			 the configurator with name configuratorName for toolName					//				
-	//																						//						
-	//																						//
-	//			http://repositoryUri/toolName/logo -> Returns a pgn file with 				//
-	//			logo of tool or not found (http status code 404) if  there's no logo		//
-	//																						//	
-	//																						//
-	//////////////////////////////////////////////////////////////////////////////////////////
-
 	@FunctionalInterface
 	public static interface IFactory<T> {
 		public T getObj(String type, String Content) throws Exception;
@@ -102,7 +79,7 @@ public class UriBasedRepository extends Repository {
 	}
 
 	public UriBasedRepository(String repositoryUri){
-		super(repositoryUri, Support.REPOSITORY_REMOTE);
+		super(repositoryUri, Support.REPOSITORY_URI_BASED);
 	}
 
 	

@@ -9,11 +9,11 @@ import exceptions.RepositoryException;
 
 public class RepositoryManager {
 	
-    public static IRepository createRemote(String location) throws RepositoryException {
+    public static IRepository createUriBased(String location) throws RepositoryException {
     	try{
     		return new UriBasedRepository(location);	
     	} catch(Exception e){
-    		throw new RepositoryException("Error instanciating remote repository!", e);
+    		throw new RepositoryException("Error instanciating uri based repository!", e);
     	}
     }
     
