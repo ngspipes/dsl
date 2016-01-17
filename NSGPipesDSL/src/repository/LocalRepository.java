@@ -1,11 +1,16 @@
 package repository;
 
 import java.io.File;
+import java.io.FileFilter;
+import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import utils.IO;
 import configurator.IConfigurator;
@@ -53,8 +58,11 @@ public class LocalRepository extends Repository {
 		return name.substring(startIndex);
     }
     	
+    private static final String TOOLS_NAMES_KEY = "toolsName";
+    private static final String CONFIGURATORS_NAMES_KEY = "configuratorsFileName";
+    private static final String TOOLS_NAMES_FILE = "Tools.json";
+	private static final String CONFIGURATORS_NAMES_FILE = "Configurators.json";
     private static final String DESCRIPTOR_NAME  = "Descriptor";
-	private static final String CONFIGURATOR_NAME= "Config";
 	private static final String LOGO_FILE_NAME = "Logo.png";
     
 	public LocalRepository(String repositoryDir){
@@ -85,9 +93,23 @@ public class LocalRepository extends Repository {
 	
 	@Override
 	protected Collection<String> loadToolsName() throws RepositoryException {
-		Stream<File> stream = Arrays.stream(new File(this.location).listFiles());
-		
-		return stream.map((folder)->folder.getName()).collect(Collectors.toList());
+		String toolsNames;
+		try{
+			toolsNames = IO.read(this.location + "/" + TOOLS_NAMES_FILE);	
+		}catch(IOException ex){
+			throw new RepositoryException("Error reading tools names file", ex);
+		}
+
+		try{
+			JSONArray names = new JSONObject(toolsNames).getJSONArray(TOOLS_NAMES_KEY);
+			List<String> tools = new LinkedList<String>();
+			for(int i=0; i<names.length(); ++i)
+				tools.add(names.getString(i));
+			
+			return tools;
+		}catch(JSONException ex){
+			throw new RepositoryException("Invalid tools name file", ex);
+		}
 	}
 
 	
@@ -109,22 +131,30 @@ public class LocalRepository extends Repository {
 	
 	@Override
 	protected Collection<String> loadConfiguratorsNameFor(String toolName) throws RepositoryException {
-		Stream<File> stream = Arrays.stream(getToolDirectory(toolName).listFiles());
-		
-		return stream.	filter((file)->getFileName(file).endsWith(CONFIGURATOR_NAME)).
-						map((file)->{
-							String fileName = getFileName(file);
-							return fileName.substring(0, (fileName.length()-CONFIGURATOR_NAME.length()));
-						}).
-						collect(Collectors.toList());
+		String configuratorsNames;
+		try{
+			configuratorsNames = IO.read(this.location + "/" + toolName + "/" + CONFIGURATORS_NAMES_FILE);	
+		}catch(IOException ex){
+			throw new RepositoryException("Error reading configurators names file", ex);
+		}
+
+		try{
+			JSONArray names = new JSONObject(configuratorsNames).getJSONArray(CONFIGURATORS_NAMES_KEY);
+			List<String> configs = new LinkedList<String>();
+			for(int i=0; i<names.length(); ++i)
+				configs.add(names.getString(i));
+			
+			return configs;
+		}catch(JSONException ex){
+			throw new RepositoryException("Invalid tools name file", ex);
+		}
 	}
 
 	
 	@Override
 	protected IConfigurator loadConfigurationFor(String toolName, String configuratorName) throws RepositoryException {
 		try{
-			configuratorName = configuratorName+CONFIGURATOR_NAME;
-    		File config = getConfigurator(getToolDirectory(toolName), configuratorName);
+			File config = FindConfigFile(toolName, configuratorName);
         	String configuratorType = getConfiguratorType(config);
         	String configuratorContent = IO.read(config.getPath());
            
@@ -132,6 +162,19 @@ public class LocalRepository extends Repository {
     	}catch(Exception e){
     		throw new RepositoryException("Erro loading tool " + toolName + "!", e);
     	}
+	}
+	
+	private File FindConfigFile(String toolName, String configuratorName) throws RepositoryException {
+		File toolDir = new File(this.location + "/" + toolName);
+		
+		String configName = configuratorName + ".";
+		FileFilter filter = (f)->f.getName().startsWith(configName)&&!f.isDirectory();
+		File[] config = toolDir.listFiles(filter);
+		
+		if(config==null || config.length==0)
+			throw new RepositoryException("Inexistent configurator name " + configuratorName);
+		
+		return config[0];
 	}
 	
 }
