@@ -12,6 +12,8 @@ public interface IConfigurator {
 	
 	public String getName();
 	
+	public String getBuilder();
+	
 	public String getUri();
 	
 	public List<String> getSetup();

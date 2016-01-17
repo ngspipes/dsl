@@ -11,6 +11,7 @@ import configurator.Configurator;
 public class XMLConfigurator extends Configurator{
 	
 	public static final String NAME_XML_TAG = "name";
+	public static final String BUILDER_XML_TAG = "builder";
 	public static final String URI_XML_TAG = "uri";
 	public static final String SETUP_XML_TAG = "setup";
 
@@ -30,7 +31,8 @@ public class XMLConfigurator extends Configurator{
 	}
 
 	public XMLConfigurator(XMLObject xml)throws XMLException{
-		super(xml.getString(NAME_XML_TAG), xml.getString(URI_XML_TAG), getSetup(xml.getXMLArray(SETUP_XML_TAG)));
+		super(	xml.getString(NAME_XML_TAG), xml.getString(BUILDER_XML_TAG), 
+				xml.getString(URI_XML_TAG), getSetup(xml.getXMLArray(SETUP_XML_TAG)));
 		this.xml = xml;
 	}
 

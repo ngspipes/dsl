@@ -12,11 +12,13 @@ public class Configurator implements IConfigurator{
 	public void setOriginRepository(IRepository originRepository){ this.originRepository = originRepository; }
 	
 	private final String name;
+	private final String builder;
 	private final String uri;
 	private final List<String> setup;
 	
-	public Configurator(String name, String uri, List<String> setup) {
+	public Configurator(String name, String builder, String uri, List<String> setup) {
 		this.name = name;
+		this.builder = builder;
 		this.uri = uri;
 		this.setup = setup;
 	}
@@ -24,6 +26,11 @@ public class Configurator implements IConfigurator{
 	@Override
 	public String getName(){
 		return name;
+	}
+	
+	@Override
+	public String getBuilder(){
+		return builder;
 	}
 	
 	@Override

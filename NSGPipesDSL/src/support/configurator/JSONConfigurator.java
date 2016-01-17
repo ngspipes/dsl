@@ -12,6 +12,7 @@ import configurator.Configurator;
 public class JSONConfigurator  extends Configurator{
 	
 	public static final String NAME_JSON_KEY = "name";
+	public static final String BUILDER_JSON_KEY = "builder";
 	public static final String URI_JSON_KEY = "uri";
 	public static final String SETUP_JSON_KEY = "setup";
 
@@ -31,7 +32,8 @@ public class JSONConfigurator  extends Configurator{
 	}
 
 	public JSONConfigurator(JSONObject json)throws JSONException{
-		super(json.getString(NAME_JSON_KEY), json.getString(URI_JSON_KEY), getSetup(json.getJSONArray(SETUP_JSON_KEY)));
+		super(	json.getString(NAME_JSON_KEY), json.getString(BUILDER_JSON_KEY),
+				json.getString(URI_JSON_KEY), getSetup(json.getJSONArray(SETUP_JSON_KEY)));
 		this.json = json;
 	}
 
