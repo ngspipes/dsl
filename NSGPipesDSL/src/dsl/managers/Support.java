@@ -178,7 +178,7 @@ public class Support {
 	}
 
 	public static ICommandBuilder getBuilder(IConfigurator config) throws CommandBuilderException {
-		return COMMAND_BUILDER_FACTORIES.get(config.getName()).create(config);
+		return COMMAND_BUILDER_FACTORIES.get(config.getBuilder()).create(config);
 	}
 
 }
