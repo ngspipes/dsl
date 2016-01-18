@@ -39,7 +39,7 @@ public class ArgumentValidator {
 		VALIDATORS.put(INT_TYPE_NAME, ArgumentValidator::validateInt);
 		VALIDATORS.put(STRING_TYPE_NAME, ArgumentValidator::validateString);
 		VALIDATORS.put(FILE_TYPE_NAME, ArgumentValidator::validateFile);
-		VALIDATORS.put(DOUBLE_TYPE_NAME, ArgumentValidator::validateFloat);
+		VALIDATORS.put(DOUBLE_TYPE_NAME, ArgumentValidator::validateDouble);
 		VALIDATORS.put(DIRECTORY_TYPE_NAME, ArgumentValidator::validateDirectory);
 	}
 	
@@ -57,9 +57,9 @@ public class ArgumentValidator {
 		}
 	}
 	
-	private static void validateFloat(String value) throws ArgumentValidationException {
+	private static void validateDouble(String value) throws ArgumentValidationException {
 		try {
-			Float.parseFloat(value);
+			Double.parseDouble(value);
 		} catch (Exception e) {
 			throw new ArgumentValidationException(value + " is not an Float value!");
 		}
