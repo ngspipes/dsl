@@ -5,8 +5,8 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import repository.IRepository;
-import configurator.IConfigurator;
-import descriptor.IToolDescriptor;
+import configurators.IConfigurator;
+import descriptors.IToolDescriptor;
 import dsl.entities.Command;
 import dsl.entities.Pipeline;
 import dsl.entities.Step;

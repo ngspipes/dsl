@@ -3,8 +3,8 @@ package dsl.entities;
 import java.util.function.Consumer;
 
 import utils.Event;
-import descriptor.IOutputDescriptor;
-import descriptor.OutputDescriptor;
+import descriptors.IOutputDescriptor;
+import descriptors.OutputDescriptor;
 
 public class Output {
 	

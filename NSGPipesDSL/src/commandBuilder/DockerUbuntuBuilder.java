@@ -1,6 +1,6 @@
 package commandBuilder;
 
-import configurator.IConfigurator;
+import configurators.IConfigurator;
 import dsl.entities.Command;
 import exceptions.CommandBuilderException;
 

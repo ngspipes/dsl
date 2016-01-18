@@ -1,7 +1,7 @@
 package dsl.entities;
 
-import descriptor.ICommandDescriptor;
-import descriptor.IToolDescriptor;
+import descriptors.ICommandDescriptor;
+import descriptors.IToolDescriptor;
 import exceptions.DSLException;
 
 public class Tool {

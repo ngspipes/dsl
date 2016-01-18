@@ -5,7 +5,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 import java.util.function.Function;
 
-import support.algorithms.trimmomatic.Trimmomatic;
+import support.TrimmomaticComposer;
 import dsl.entities.Argument;
 
 public class ArgumentsComposerManager {
@@ -104,7 +104,7 @@ public class ArgumentsComposerManager {
 	// Format: [TRIMMOMATIC STYLE ArgCategory:arg:arg:arg]
 	@ComposerNameAnnotation(name = Support.COMPOSER_TRIMMOMATIC_NAME)
 	public static String trimmomatic(List<Argument> args){ 
-		return Trimmomatic.compose(args);
+		return new TrimmomaticComposer().compose(args);
 	}
 	
 	// Format: [VELVETG STYLE all arguments has format [name value] except output_directory that has format [value]]

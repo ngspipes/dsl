@@ -1,4 +1,4 @@
-package support.algorithms.trimmomatic;
+package support;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import descriptor.IArgumentDescriptor;
+import argmentsComposer.IArgumentsComposer;
+import descriptors.IArgumentDescriptor;
 import dsl.entities.Argument;
 
-public class Trimmomatic {
+public class TrimmomaticComposer implements IArgumentsComposer{
 		 
 	public static final String WITHOUT_GROUP_NAME = "";
 	public static final String ILLUMINACLIP_GROUP_NAME = "ILLUMINACLIP";
@@ -40,6 +41,7 @@ public class Trimmomatic {
 	
 	private static final Map<String, String> ARGS_GROUP = new HashMap<String, String>();
 	
+
 	static {
 		ARGS_GROUP.put("fastaWithAdaptersEtc", ILLUMINACLIP_GROUP_NAME);
 		ARGS_GROUP.put("seed mismatches", ILLUMINACLIP_GROUP_NAME);
@@ -54,22 +56,7 @@ public class Trimmomatic {
 		ARGS_GROUP.put("minlen length", MINLEN_GROUP_NAME);	
 	}
 	
-	public static String compose(List<Argument> args){
-		Map<String, Map<String, Argument>> arguments = convertToGroupMap(args);
-		
-		StringBuilder compose = new StringBuilder(getWithoutName(arguments)).append(" ");
-				
-		compose.append(get(arguments, ILLUMINACLIP_GROUP_NAME)).append(" ");
-		compose.append(get(arguments, SLIDINGWINDOW_GROUP_NAME)).append(" ");
-		compose.append(get(arguments, LEADING_GROUP_NAME)).append(" ");
-		compose.append(get(arguments, TRAILING_GROUP_NAME)).append(" ");
-		compose.append(get(arguments, CROP_GROUP_NAME)).append(" ");
-		compose.append(get(arguments, HEADCROP_GROUP_NAME)).append(" ");
-		compose.append(get(arguments, MINLEN_GROUP_NAME)).append(" ");
-		
-		return compose.toString();
-	}
-	
+
 	private static Map<String, Map<String, Argument>> convertToGroupMap(List<Argument> args){
 		Map<String, Map<String, Argument>> arguments = new HashMap<>();
 		
@@ -134,5 +121,23 @@ public class Trimmomatic {
 		
 		return sb.toString().substring(0, sb.length()-":".length());
 	}
+
 	
+	@Override
+	public String compose(List<Argument> args){
+		Map<String, Map<String, Argument>> arguments = convertToGroupMap(args);
+		
+		StringBuilder compose = new StringBuilder(getWithoutName(arguments)).append(" ");
+				
+		compose.append(get(arguments, ILLUMINACLIP_GROUP_NAME)).append(" ");
+		compose.append(get(arguments, SLIDINGWINDOW_GROUP_NAME)).append(" ");
+		compose.append(get(arguments, LEADING_GROUP_NAME)).append(" ");
+		compose.append(get(arguments, TRAILING_GROUP_NAME)).append(" ");
+		compose.append(get(arguments, CROP_GROUP_NAME)).append(" ");
+		compose.append(get(arguments, HEADCROP_GROUP_NAME)).append(" ");
+		compose.append(get(arguments, MINLEN_GROUP_NAME)).append(" ");
+		
+		return compose.toString();
+	}
+		
 }

@@ -10,7 +10,7 @@ import progressReporter.IProgressReporter;
 import progressReporter.InternalReporter;
 import utils.Event;
 import utils.Utils;
-import configurator.IConfigurator;
+import configurators.IConfigurator;
 import dsl.Log;
 import exceptions.DSLException;
 

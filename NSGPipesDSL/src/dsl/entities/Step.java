@@ -11,7 +11,7 @@ import utils.Event;
 
 import commandBuilder.ICommandBuilder;
 
-import configurator.IConfigurator;
+import configurators.IConfigurator;
 import dsl.ArgumentValidator;
 import dsl.ArgumentValidator.ArgumentValidationException;
 import dsl.CommandUtils;

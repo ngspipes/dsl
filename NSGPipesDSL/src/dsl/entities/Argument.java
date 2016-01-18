@@ -1,7 +1,7 @@
 package dsl.entities;
 
 import utils.Event;
-import descriptor.IArgumentDescriptor;
+import descriptors.IArgumentDescriptor;
 
 public class Argument {
 	

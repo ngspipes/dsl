@@ -7,5 +7,7 @@ import exceptions.DSLException;
 
 @FunctionalInterface
 public interface IArgumentsComposer {
+	
 	public String compose(List<Argument> args) throws DSLException;
+	
 }

@@ -4,7 +4,7 @@ import commandBuilder.CommandBuilder;
 import commandBuilder.DockerUbuntuBuilder;
 import commandBuilder.ICommandBuilder;
 
-import configurator.IConfigurator;
+import configurators.IConfigurator;
 
 public class CommandBuilderManager {
 

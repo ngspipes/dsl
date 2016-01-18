@@ -1,8 +1,8 @@
 package dsl.language;
 
 import repository.IRepository;
-import configurator.IConfigurator;
-import descriptor.IToolDescriptor;
+import configurators.IConfigurator;
+import descriptors.IToolDescriptor;
 import dsl.entities.Argument;
 import dsl.entities.Chain;
 import dsl.entities.Command;
@@ -10,6 +10,7 @@ import dsl.entities.Output;
 import dsl.entities.Tool;
 import dsl.managers.Support;
 import exceptions.DSLException;
+import exceptions.RepositoryException;
 
 public class Pipeline {
 	
@@ -24,10 +25,18 @@ public class Pipeline {
 	public class PipeCommandArgument{
 		
 		public PipeTool tool(String toolName, String configuratorName) throws DSLException {
-			if(!ctx.repository.getToolsName().contains(toolName))
-				throw new DSLException("Tool " + toolName + " doesn't exist!");
+			try{
+				if(!ctx.repository.getToolsName().contains(toolName))
+					throw new DSLException("Tool " + toolName + " doesn't exist!");	
+			}catch(RepositoryException ex){
+				throw new DSLException("Error getting tools names from repository", ex);
+			}
 			
-			return tool(ctx.repository.getTool(toolName), ctx.repository.getConfigurationFor(toolName, configuratorName));
+			try{
+				return tool(ctx.repository.getTool(toolName), ctx.repository.getConfigurationFor(toolName, configuratorName));	
+			}catch(RepositoryException ex){
+				throw new DSLException("Error getting tool " + toolName +  " from repository", ex);
+			}
 		}
 		
 		public PipeTool tool(IToolDescriptor toolDescriptor, IConfigurator configurator) throws DSLException {
@@ -173,8 +182,8 @@ public class Pipeline {
 		this(null);
 	}
 	
-	public Pipeline(String repositoryType, String repositoryLocation) throws DSLException {
-		this(Support.getRepository(repositoryType, repositoryLocation));
+	public Pipeline(String repositoryType, String repositoryLocation) throws RepositoryException {
+		this(Support.getRepository(repositoryType, repositoryLocation));		
 	}
 	
 	public Pipeline(IRepository repository) {
@@ -183,10 +192,18 @@ public class Pipeline {
 	
 	
 	public PipeTool tool(String toolName, String configuratorName) throws DSLException {
-		if(!ctx.repository.getToolsName().contains(toolName))
-			throw new DSLException("Tool " + toolName + " doesn't exist!");
+		try{
+			if(!ctx.repository.getToolsName().contains(toolName))
+				throw new DSLException("Tool " + toolName + " doesn't exist!");	
+		}catch(RepositoryException ex){
+			throw new DSLException("Error getting tools names from repository", ex);
+		}
 		
-		return tool(ctx.repository.getTool(toolName), ctx.repository.getConfigurationFor(toolName, configuratorName));
+		try {
+			return tool(ctx.repository.getTool(toolName), ctx.repository.getConfigurationFor(toolName, configuratorName));	
+		} catch (RepositoryException ex) {
+			throw new DSLException("Error getting tool " + toolName + " from repository", ex);
+		}
 	}
 
 	public PipeTool tool(IToolDescriptor toolDescriptor, IConfigurator configurator) throws DSLException {

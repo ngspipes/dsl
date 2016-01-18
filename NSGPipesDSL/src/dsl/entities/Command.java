@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 import argmentsComposer.IArgumentsComposer;
-import descriptor.IArgumentDescriptor;
-import descriptor.ICommandDescriptor;
-import descriptor.IOutputDescriptor;
-import descriptor.OutputDescriptor;
+import descriptors.IArgumentDescriptor;
+import descriptors.ICommandDescriptor;
+import descriptors.IOutputDescriptor;
+import descriptors.OutputDescriptor;
 import dsl.managers.Support;
 
 public class Command {

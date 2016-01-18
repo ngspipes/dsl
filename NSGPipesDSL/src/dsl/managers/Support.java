@@ -4,7 +4,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,56 +12,25 @@ import argmentsComposer.IArgumentsComposer;
 
 import commandBuilder.ICommandBuilder;
 
-import configurator.IConfigurator;
-import descriptor.IToolDescriptor;
+import configurators.IConfigurator;
 import dsl.entities.Argument;
 import dsl.managers.ArgumentsComposerManager.ComposerNameAnnotation;
 import exceptions.CommandBuilderException;
-import exceptions.ConfiguratorException;
 import exceptions.DSLException;
-import exceptions.DescriptorException;
 import exceptions.RepositoryException;
 
 public class Support {
 
-	public static final List<String> SUPPORTED_TYPES = new LinkedList<>();;
-	public static final String JSON_TYPE= "json";
-	public static final String XML_TYPE= "xml";
-
-	private static final Map<String, ConfiguratorFactory> CONFIGURATOR_FACTORIES = new HashMap<>();
 	public static final Map<String, RepositoryFactory> REPOSITORY_FACTORIES = new HashMap<>();
-	private static final Map<String, ToolDescriptorFactory> TOOL_DESCRIPTOR_FACTORIES = new HashMap<>();
 	public static final Map<String, IArgumentsComposer> COMPOSERS = new HashMap<>();
 	public static final Map<String, CommanBuilderFactory> COMMAND_BUILDER_FACTORIES = new HashMap<>();
 	
 	
 	static{
-		loadConfiguratorFactories();
 		loadRepositoryFactories();
-		loadToolDescriptorFactories();
 		loadArgumentsComposers();
 		loadCommandBuilderFactories();
-		
-		SUPPORTED_TYPES.add(JSON_TYPE);
-		SUPPORTED_TYPES.add(XML_TYPE);
 	}
-
-	//CONFIGURATORS
-	@FunctionalInterface
-	private static interface ConfiguratorFactory{
-		public IConfigurator create(String content) throws ConfiguratorException;
-	}
-	
-	private static void loadConfiguratorFactories(){
-		CONFIGURATOR_FACTORIES.put(Support.JSON_TYPE, ConfiguratorManager::JSONFactory);
-		CONFIGURATOR_FACTORIES.put(Support.XML_TYPE, ConfiguratorManager::XMLFactory);
-	}
-	
-	public static IConfigurator getConfigurator(String type, String content) throws ConfiguratorException {
-		return CONFIGURATOR_FACTORIES.get(type).create(content);
-	}
-
-
 
 
 	//REPOSITORY
@@ -86,26 +54,8 @@ public class Support {
 	}
 
 
+
 	
-	
-	//TOOL DESCRIPTORS
-	@FunctionalInterface
-	public static interface ToolDescriptorFactory{
-		public IToolDescriptor create(String content) throws DescriptorException;
-	}
-
-	private static void loadToolDescriptorFactories(){
-		TOOL_DESCRIPTOR_FACTORIES.put(Support.JSON_TYPE, ToolDescriptorManager::jsonFactory);
-		TOOL_DESCRIPTOR_FACTORIES.put(Support.XML_TYPE, ToolDescriptorManager::xmlFactory);
-	}	
-
-	public static IToolDescriptor getToolDescriptor(String type, String content) throws DescriptorException{
-		return TOOL_DESCRIPTOR_FACTORIES.get(type).create(content);
-	}
-
-
-
-
 	//ARGUMENTS COMPOSER
 	public static final String COMPOSER_DUMMY_NAME = "dummy";
 	public static final String COMPOSER_VALUES_SEPARATED_BY_SPACE_NAME = "values_separated_by_space";
