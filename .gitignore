@@ -2,3 +2,5 @@ NGSPipesDSL/bin/
 .settings/
 *.classpath
 *.class
+.gradle
+build/
