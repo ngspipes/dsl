@@ -11,7 +11,7 @@ import exceptions.ProgressReporterException;
 public class SocketReporter implements IProgressReporter{
 	
 	public static final String TRACE_TAG = "TRACE\t";
-	public static final String ERROR_TAG = "ERROR\t";
+	public static final String ERROR_TAG = "INFO\t";
 	public static final String INFO_TAG = "INFO\t";
 	
 	private final int port;
@@ -28,16 +28,19 @@ public class SocketReporter implements IProgressReporter{
 	@Override
 	public void reportTrace(String msg) throws ProgressReporterException {
 		writer.println(TRACE_TAG + msg);
+		writer.flush();
 	}
 	
 	@Override
 	public void reportError(String msg) throws ProgressReporterException {
 		writer.println(ERROR_TAG + msg);
+		writer.flush();
 	}
 	
 	@Override
 	public void reportInfo(String msg) throws ProgressReporterException {
 		writer.println(INFO_TAG + msg);
+		writer.flush();
 	}
 
 	@Override
