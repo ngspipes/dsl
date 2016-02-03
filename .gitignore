@@ -4,3 +4,4 @@ NGSPipesDSL/bin/
 *.class
 .gradle
 build/
+*.iml
