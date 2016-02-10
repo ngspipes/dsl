@@ -87,11 +87,20 @@ public class ArgumentValidator {
 	
 	public static void validate(Argument argument) throws ArgumentValidationException {
 		Validator validator = ArgumentValidator.VALIDATORS.get(argument.getType());
-		
+		if (validator == null) {
+            throw new ArgumentValidationException(
+                    "No validator found for argument "
+                            + argument.getName()
+                            + " with type " + argument.getType());
+        }
 		try{
 			validator.validate(argument.getValue());	
 		}catch(ArgumentValidationException ex){
-			throw new ArgumentValidationException("Invalid Argument " + argument.getName() + " from Command " + argument.getOriginCommand().getName() + " : " + ex.getMessage());
+			throw new ArgumentValidationException("Invalid Argument "
+					+ argument.getName() + " of type "
+					+ argument.getType() + " from Command "
+					+ argument.getOriginCommand().getName()
+					+ " : " + ex.getMessage());
 		}	
 	}
 	
