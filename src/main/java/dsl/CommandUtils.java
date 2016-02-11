@@ -104,6 +104,7 @@ public class CommandUtils {
 			}
 		});
 
+		t.setDaemon(true);
 		t.start();
 
 		return t;
