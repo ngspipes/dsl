@@ -35,6 +35,7 @@ public class Log {
 
 	public static void start() throws FileNotFoundException {
 		WRITER = new PrintWriter(LOG_DIR);
+		log("START");
 	}
 
 	private static String GetLogDir() {
@@ -53,6 +54,7 @@ public class Log {
 	}
 
 	public static void finish() {
+		log("FINISH");
 		WRITER.close();
 	}
 
