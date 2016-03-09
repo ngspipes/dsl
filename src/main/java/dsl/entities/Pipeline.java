@@ -19,6 +19,7 @@
  */
  package dsl.entities;
 
+import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -26,7 +27,6 @@ import java.util.List;
 
 import progressReporter.ConsoleReporter;
 import progressReporter.IProgressReporter;
-import progressReporter.InternalReporter;
 import utils.Event;
 import utils.Utils;
 import configurators.IConfigurator;
@@ -155,34 +155,68 @@ public class Pipeline {
 		run(reporter, from, steps.size());
 	}
 
-	public void run(IProgressReporter reporter, int from, int to) throws DSLException{
-		reporter = new InternalReporter(reporter);
-
+	public void run(IProgressReporter reporter, int from, int to) throws DSLException {
 		try{
-			Log.start();
-			reporter.open();
-			reporter.reportTrace(" :: STARTED :: ");
-
+			start(reporter);
 			internalRun(reporter, from, to);
-		}catch(Exception ex){
-			reporter.reportError("Error : " + ex.getMessage());
+		}catch(DSLException ex){
+			String message = "Error : " + ex.getMessage();
+
+			try {
+				reporter.reportError(message);
+			} catch(DSLException e){
+				Log.log("Error reporting msg : " + message);
+			}
+
+			Log.log(message);
 			Log.log(Utils.getStackTrace(ex));
-			throw new DSLException("Error running Pipeline from " + from + " to " + to, ex);
+
+			throw ex;
 		}finally{
+			finish(reporter);
+		}
+	}
+
+	private void start(IProgressReporter reporter) throws DSLException {
+		DSLException logException = null;
+		DSLException reporterException = null;
+
+		try {
+			Log.start();
+		} catch (FileNotFoundException ex) {
+			logException = new DSLException("Error starting Log.", ex);
+		}
+
+		try {
+			reporter.open();
+		} catch(DSLException ex) {
+			reporterException = ex;
+		}
+
+		if(logException != null)
+			throw logException;
+
+		if(reporter != null)
+			throw reporterException;
+	}
+
+	private void finish(IProgressReporter reporter) throws DSLException {
+		try {
 			reporter.reportTrace(" :: FINISHED :: ");
 			reporter.close();
+		} finally {
 			Log.finish();
 		}
 	}
 
 	private void internalRun(IProgressReporter reporter, int from, int to) throws DSLException{
-		List<Step> orderedSteps = new LinkedList<Step>(steps);
+		List<Step> orderedSteps = new LinkedList<>(steps);
 		Collections.sort(orderedSteps, (a,b)->a.getOrder()-b.getOrder());
 
 		for(Step step : orderedSteps){
-			if(step.getOrder()<from)
+			if(step.getOrder() < from)
 				reporter.reportTrace("Skipped -> " + step);
-			else if(step.getOrder()<=to){
+			else if(step.getOrder() <= to){
 				reporter.reportTrace("Running -> " + step);
 				step.run(reporter);
 			}else

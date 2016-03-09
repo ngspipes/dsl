@@ -73,7 +73,7 @@ public class CommandUtils {
 			p = Runtime.getRuntime().exec(command);
 
 			Thread inputThread = createThread(()->logStream(p.getInputStream(), reporter::reportInfo), inputBox);
-			Thread errorThread = createThread(()->logStream(p.getErrorStream(), reporter::reportError), errorBox);
+			Thread errorThread = createThread(()->logStream(p.getErrorStream(), reporter::reportInfo), errorBox);
 
 			inputThread.join();
 			errorThread.join();
@@ -85,11 +85,10 @@ public class CommandUtils {
 		
 		try {
 			int exitCode = p.waitFor();
-			if(exitCode != 0){
-				String message = "Command " + command + " finished with Exit Code = " + exitCode;
-				Log.log(message);
-				reporter.reportError(message);
-			}
+
+			String message = "Command " + command + " finished with Exit Code = " + exitCode;
+			Log.log(message);
+			reporter.reportInfo(message);
 		} catch (Exception ex) {
 			throw new DSLException("Error executing command " + command, ex);
 		}		
