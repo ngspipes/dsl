@@ -36,13 +36,13 @@ public class CommandUtils {
 	}
 	
 	@FunctionalInterface
-	private static interface LogLambda {
-		public void log() throws Exception;
+	private interface LogLambda {
+		void log() throws Exception;
 	}
 	
 	@FunctionalInterface
-	private static interface InternalReporter {
-		public void report(String msg) throws ProgressReporterException;
+	private interface InternalReporter {
+		void report(String msg) throws ProgressReporterException;
 	}
 	
 	protected static void logStream(InputStream in, InternalReporter reporter) throws IOException, ProgressReporterException {

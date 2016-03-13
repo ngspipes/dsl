@@ -24,10 +24,10 @@ import exceptions.ProgressReporterException;
 
 public interface IProgressReporter {
 
-	public void open() throws ProgressReporterException;
-	public void reportTrace(String msg) throws ProgressReporterException;
-	public void reportError(String msg) throws ProgressReporterException;
-	public void reportInfo(String msg) throws ProgressReporterException;
-	public void close() throws ProgressReporterException;
+	void open() throws ProgressReporterException;
+	void reportTrace(String msg) throws ProgressReporterException;
+	void reportError(String msg) throws ProgressReporterException;
+	void reportInfo(String msg) throws ProgressReporterException;
+	void close() throws ProgressReporterException;
 	
 }

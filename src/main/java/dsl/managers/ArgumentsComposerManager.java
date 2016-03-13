@@ -30,7 +30,7 @@ import dsl.entities.Argument;
 public class ArgumentsComposerManager {
 		
 	@Retention(RetentionPolicy.RUNTIME)
-	public static @interface ComposerNameAnnotation {
+	public @interface ComposerNameAnnotation {
 		String name();
 	}
 	

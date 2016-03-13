@@ -25,6 +25,6 @@ import exceptions.CommandBuilderException;
 @FunctionalInterface
 public interface ICommandBuilder {
 
-	public void build(Command command) throws CommandBuilderException;
+	void build(Command command) throws CommandBuilderException;
 
 }

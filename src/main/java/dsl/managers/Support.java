@@ -54,8 +54,8 @@ public class Support {
 
 	//REPOSITORY
 	@FunctionalInterface
-	public static interface RepositoryFactory{
-		public IRepository create(String location) throws RepositoryException;
+	public interface RepositoryFactory{
+		IRepository create(String location) throws RepositoryException;
 	}
 
 	public static final String REPOSITORY_URI_BASED = "UriBased";
@@ -108,7 +108,7 @@ public class Support {
 	private static IArgumentsComposer getComposer(Method method){
 		return (args)->{
 			try{
-				return (String) method.invoke(null, new Object[]{args});	
+				return (String) method.invoke(null, args);
 			}catch(Exception e){
 				throw new DSLException("Error invoking composer!", e);
 			}
@@ -134,8 +134,8 @@ public class Support {
 
 	//COMMAND BUILDER
 	@FunctionalInterface
-	public static interface CommanBuilderFactory{
-		public ICommandBuilder create(IConfigurator config) throws CommandBuilderException;
+	public interface CommanBuilderFactory{
+		ICommandBuilder create(IConfigurator config) throws CommandBuilderException;
 	}
 
 	public static final String COMMAND_BUILDER_DOCKER = "Docker";

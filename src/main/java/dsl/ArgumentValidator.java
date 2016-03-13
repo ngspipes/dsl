@@ -40,8 +40,8 @@ public class ArgumentValidator {
 	}
 	
 	@FunctionalInterface
-	public static interface Validator{
-		public void validate(String value) throws ArgumentValidationException;
+	public interface Validator{
+		void validate(String value) throws ArgumentValidationException;
 	}
 	
 	public static final String INT_TYPE_NAME = "int";
