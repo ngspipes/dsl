@@ -19,19 +19,19 @@
  */
  package dsl.entities;
 
+import configurators.IConfigurator;
+import dsl.Log;
+import exceptions.DSLException;
+import progressReporter.ConsoleReporter;
+import progressReporter.IProgressReporter;
+import utils.Event;
+import utils.Utils;
+
 import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-
-import progressReporter.ConsoleReporter;
-import progressReporter.IProgressReporter;
-import utils.Event;
-import utils.Utils;
-import configurators.IConfigurator;
-import dsl.Log;
-import exceptions.DSLException;
 
 public class Pipeline {
 
@@ -196,7 +196,7 @@ public class Pipeline {
 		if(logException != null)
 			throw logException;
 
-		if(reporter != null)
+		if(reporterException != null)
 			throw reporterException;
 	}
 
