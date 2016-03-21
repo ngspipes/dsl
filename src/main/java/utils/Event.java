@@ -32,20 +32,20 @@ public class Event<T> {
 		this.listeners = new HashMap<>();
 	}
 
-	public void addListner(Consumer<T> listener){
+	public void addListener(Consumer<T> listener){
 		listeners.put(listener, listener);
 	}
 
-	public void removeListner(Consumer<T> listener) {
+	public void removeListener(Consumer<T> listener) {
 		listeners.remove(listener);
 	}
 
-	public void addListner(Runnable listener){
+	public void addListener(Runnable listener){
 		Consumer<T> consumer = (t)->listener.run();
 		listeners.put(listener, consumer);
 	}
 
-	public void removeListner(Runnable listener){
+	public void removeListener(Runnable listener){
 		listeners.remove(listener);
 	}
 

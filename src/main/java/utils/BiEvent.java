@@ -33,20 +33,20 @@ public class BiEvent<T, R> {
 		this.listeners = new HashMap<>();
 	}
 
-	public void addListner(BiConsumer<T, R> listener){
+	public void addListener(BiConsumer<T, R> listener){
 		listeners.put(listener, listener);
 	}
 
-	public void removeListner(Consumer<T> listener) {
+	public void removeListener(Consumer<T> listener) {
 		listeners.remove(listener);
 	}
 
-	public void addListner(Runnable listener){
+	public void addListener(Runnable listener){
 		BiConsumer<T, R> consumer = (t, r)->listener.run();
 		listeners.put(listener, consumer);
 	}
 
-	public void removeListner(Runnable listener){
+	public void removeListener(Runnable listener){
 		listeners.remove(listener);
 	}
 

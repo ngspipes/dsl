@@ -113,7 +113,7 @@ public class Command {
 				argument = arguments.get(out.getArgumentName());
 				inputDependencies.get(argument).add(output);
 				outputDependency.put(output, argument);
-				argument.valueChangedEvent.addListner(output::onArgumentValueChange);
+				argument.valueChangedEvent.addListener(output::onArgumentValueChange);
 			}
 		}
 	}

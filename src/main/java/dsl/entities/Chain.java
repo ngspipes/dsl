@@ -57,7 +57,7 @@ public class Chain {
 		if(output.getValue()!=null)
 			argument.setValue(output.getValue());
 		
-		output.valueChangedEvent.addListner(onOutputChange);
+		output.valueChangedEvent.addListener(onOutputChange);
 		setConnected(true);
 	}
 	
@@ -65,7 +65,7 @@ public class Chain {
 		if(!connected)
 			return; 
 		
-		output.valueChangedEvent.removeListner(onOutputChange);
+		output.valueChangedEvent.removeListener(onOutputChange);
 		setConnected(false);
 	}
 
