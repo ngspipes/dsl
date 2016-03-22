@@ -28,7 +28,7 @@ import java.util.GregorianCalendar;
 
 public class Log {
 
-	private static final SimpleDateFormat DATE_FORMATER = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 	public static final String LOG_DIR = GetLogDir();
 	private static PrintWriter WRITER;
 
@@ -59,7 +59,7 @@ public class Log {
 	}
 
 	private static String getCurrentTime(){
-		return DATE_FORMATER.format(new Date());
+		return DATE_FORMATTER.format(new Date());
 	}
 
 	public static void log(String msg){

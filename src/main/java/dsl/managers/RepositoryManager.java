@@ -19,11 +19,11 @@
  */
 package dsl.managers;
 
+import exceptions.RepositoryException;
 import repository.GithubRepository;
 import repository.IRepository;
 import repository.LocalRepository;
 import repository.UriBasedRepository;
-import exceptions.RepositoryException;
 
 
 public class RepositoryManager {
@@ -32,7 +32,7 @@ public class RepositoryManager {
     	try{
     		return new UriBasedRepository(location);	
     	} catch(Exception e){
-    		throw new RepositoryException("Error instanciating uri based repository!", e);
+    		throw new RepositoryException("Error instantiating uri based repository!", e);
     	}
     }
     
@@ -40,7 +40,7 @@ public class RepositoryManager {
     	try{
     		return new LocalRepository(location);	
     	} catch(Exception e){
-    		throw new RepositoryException("Error instanciating local repository!", e);
+    		throw new RepositoryException("Error instantiating local repository!", e);
     	}
     }
     
@@ -48,7 +48,7 @@ public class RepositoryManager {
     	try{
     		return new GithubRepository(location);	
     	} catch(Exception e){
-    		throw new RepositoryException("Error instanciating local repository!", e);
+    		throw new RepositoryException("Error instantiating local repository!", e);
     	}
     }
    

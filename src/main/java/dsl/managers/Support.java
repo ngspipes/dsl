@@ -19,6 +19,16 @@
  */
 package dsl.managers;
 
+import argmentsComposer.IArgumentsComposer;
+import commandBuilder.ICommandBuilder;
+import configurators.IConfigurator;
+import dsl.entities.Argument;
+import dsl.managers.ArgumentsComposerManager.ComposerNameAnnotation;
+import exceptions.CommandBuilderException;
+import exceptions.DSLException;
+import exceptions.RepositoryException;
+import repository.IRepository;
+
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
@@ -26,23 +36,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import repository.IRepository;
-import argmentsComposer.IArgumentsComposer;
-
-import commandBuilder.ICommandBuilder;
-
-import configurators.IConfigurator;
-import dsl.entities.Argument;
-import dsl.managers.ArgumentsComposerManager.ComposerNameAnnotation;
-import exceptions.CommandBuilderException;
-import exceptions.DSLException;
-import exceptions.RepositoryException;
-
 public class Support {
 
 	public static final Map<String, RepositoryFactory> REPOSITORY_FACTORIES = new HashMap<>();
 	public static final Map<String, IArgumentsComposer> COMPOSERS = new HashMap<>();
-	public static final Map<String, CommanBuilderFactory> COMMAND_BUILDER_FACTORIES = new HashMap<>();
+	public static final Map<String, CommandBuilderFactory> COMMAND_BUILDER_FACTORIES = new HashMap<>();
 	
 	
 	static{
@@ -95,8 +93,8 @@ public class Support {
 	private static boolean isComposer(Method method){
 		// Is static
 		// Returns String
-		// Recieves only 1 argument of type List<Argument>
-		// Is anotated with ComposerNameAnnotation
+		// Receives only 1 argument of type List<Argument>
+		// Is annotated with ComposerNameAnnotation
 		return Modifier.isStatic(method.getModifiers()) && 
 				method.getReturnType().isAssignableFrom(String.class) &&
 				method.getParameters().length==1 &&
@@ -134,7 +132,7 @@ public class Support {
 
 	//COMMAND BUILDER
 	@FunctionalInterface
-	public interface CommanBuilderFactory{
+	public interface CommandBuilderFactory {
 		ICommandBuilder create(IConfigurator config) throws CommandBuilderException;
 	}
 

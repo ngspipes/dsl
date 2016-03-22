@@ -19,13 +19,13 @@
  */
 package dsl.managers;
 
+import dsl.entities.Argument;
+import support.TrimmomaticComposer;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 import java.util.function.Function;
-
-import support.TrimmomaticComposer;
-import dsl.entities.Argument;
 
 public class ArgumentsComposerManager {
 		
@@ -43,7 +43,7 @@ public class ArgumentsComposerManager {
 		return sb.toString();
 	}
 	
-	private static String composeEndControled(List<Argument> args, Function<Argument, String> func, Function<Argument, String> endFunc){
+	private static String composeEndControlled(List<Argument> args, Function<Argument, String> func, Function<Argument, String> endFunc){
 		StringBuilder sb = new StringBuilder();
 		
 		for(int i=0; i<args.size()-1; ++i)
@@ -93,31 +93,31 @@ public class ArgumentsComposerManager {
 	// Format: [value:value:value]
 	@ComposerNameAnnotation(name = Support.COMPOSER_VALUES_SEPARATED_BY_COLON_NAME)
 	public static String valuesSeparatedByColon(List<Argument> args){ 
-		return composeEndControled(args, (arg)->arg.getValue()+":", (arg)->arg.getValue());
+		return composeEndControlled(args, (arg)->arg.getValue()+":", (arg)->arg.getValue());
 	}
 
 	// Format: [value|value|value]
 	@ComposerNameAnnotation(name = Support.COMPOSER_VALUES_SEPARATED_BY_VERTICAL_BAR_NAME)
 	public static String valuesSeparatedByVerticalBar(List<Argument> args){ 
-		return composeEndControled(args, (arg)->arg.getValue()+"|", (arg)->arg.getValue());
+		return composeEndControlled(args, (arg)->arg.getValue()+"|", (arg)->arg.getValue());
 	}
 
 	// Format: [value-value-value]
 	@ComposerNameAnnotation(name = Support.COMPOSER_VALUES_SEPARATED_BY_HYPHEN_NAME)
 	public static String valuesSeparatedByHyphen(List<Argument> args){ 
-		return composeEndControled(args, (arg)->arg.getValue()+"-", (arg)->arg.getValue());
+		return composeEndControlled(args, (arg)->arg.getValue()+"-", (arg)->arg.getValue());
 	}
 
 	// Format: [value/value/value]
 	@ComposerNameAnnotation(name = Support.COMPOSER_VALUES_SEPARATED_BY_SLASH_NAME)
 	public static String valuesSeparatedBySlash(List<Argument> args){ 
-		return composeEndControled(args, (arg)->arg.getValue()+"/", (arg)->arg.getValue());
+		return composeEndControlled(args, (arg)->arg.getValue()+"/", (arg)->arg.getValue());
 	}
 
 	// Format: [value,value,value]
 	@ComposerNameAnnotation(name = Support.COMPOSER_VALUES_SEPARATED_BY_COMMA_NAME)
 	public static String valuesSeparatedByComma(List<Argument> args){ 
-		return composeEndControled(args, (arg)->arg.getValue()+",", (arg)->arg.getValue());
+		return composeEndControlled(args, (arg)->arg.getValue()+",", (arg)->arg.getValue());
 	}
 	
 	// Format: [TRIMMOMATIC STYLE ArgCategory:arg:arg:arg]

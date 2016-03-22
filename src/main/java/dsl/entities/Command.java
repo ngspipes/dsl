@@ -19,18 +19,14 @@
  */
 package dsl.entities;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 import argmentsComposer.IArgumentsComposer;
 import descriptors.IArgumentDescriptor;
 import descriptors.ICommandDescriptor;
 import descriptors.IOutputDescriptor;
 import descriptors.OutputDescriptor;
 import dsl.managers.Support;
+
+import java.util.*;
 
 public class Command {
 	
@@ -63,7 +59,7 @@ public class Command {
 	public Collection<Output> getDependentsOf(Argument argument){ return inputDependencies.get(argument); }
 	
 	private final Map<Output, Argument> outputDependency;
-	public Argument getDespendencyOf(Output output){ return outputDependency.get(output); }
+	public Argument getDependencyOf(Output output){ return outputDependency.get(output); }
 
 	private final String name;
 	public String getName(){ return name; }
