@@ -93,31 +93,31 @@ public class ArgumentsComposerManager {
 	// Format: [value:value:value]
 	@ComposerNameAnnotation(name = Support.COMPOSER_VALUES_SEPARATED_BY_COLON_NAME)
 	public static String valuesSeparatedByColon(List<Argument> args){ 
-		return composeEndControlled(args, (arg)->arg.getValue()+":", (arg)->arg.getValue());
+		return composeEndControlled(args, (arg)->arg.getValue()+":", Argument::getValue);
 	}
 
 	// Format: [value|value|value]
 	@ComposerNameAnnotation(name = Support.COMPOSER_VALUES_SEPARATED_BY_VERTICAL_BAR_NAME)
 	public static String valuesSeparatedByVerticalBar(List<Argument> args){ 
-		return composeEndControlled(args, (arg)->arg.getValue()+"|", (arg)->arg.getValue());
+		return composeEndControlled(args, (arg)->arg.getValue()+"|", Argument::getValue);
 	}
 
 	// Format: [value-value-value]
 	@ComposerNameAnnotation(name = Support.COMPOSER_VALUES_SEPARATED_BY_HYPHEN_NAME)
 	public static String valuesSeparatedByHyphen(List<Argument> args){ 
-		return composeEndControlled(args, (arg)->arg.getValue()+"-", (arg)->arg.getValue());
+		return composeEndControlled(args, (arg)->arg.getValue()+"-", Argument::getValue);
 	}
 
 	// Format: [value/value/value]
 	@ComposerNameAnnotation(name = Support.COMPOSER_VALUES_SEPARATED_BY_SLASH_NAME)
 	public static String valuesSeparatedBySlash(List<Argument> args){ 
-		return composeEndControlled(args, (arg)->arg.getValue()+"/", (arg)->arg.getValue());
+		return composeEndControlled(args, (arg)->arg.getValue()+"/", Argument::getValue);
 	}
 
 	// Format: [value,value,value]
 	@ComposerNameAnnotation(name = Support.COMPOSER_VALUES_SEPARATED_BY_COMMA_NAME)
 	public static String valuesSeparatedByComma(List<Argument> args){ 
-		return composeEndControlled(args, (arg)->arg.getValue()+",", (arg)->arg.getValue());
+		return composeEndControlled(args, (arg)->arg.getValue()+",", Argument::getValue);
 	}
 	
 	// Format: [TRIMMOMATIC STYLE ArgCategory:arg:arg:arg]

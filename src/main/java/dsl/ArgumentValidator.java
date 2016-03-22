@@ -19,11 +19,11 @@
  */
 package dsl;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import dsl.entities.Argument;
 import exceptions.DSLException;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ArgumentValidator {
 	
@@ -53,7 +53,7 @@ public class ArgumentValidator {
 	public static final Map<String, Validator> VALIDATORS;
 	
 	static{
-		VALIDATORS = new HashMap<String, Validator>();
+		VALIDATORS = new HashMap<>();
 		
 		VALIDATORS.put(INT_TYPE_NAME, ArgumentValidator::validateInt);
 		VALIDATORS.put(STRING_TYPE_NAME, ArgumentValidator::validateString);

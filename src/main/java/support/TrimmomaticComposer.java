@@ -19,15 +19,15 @@
  */
 package support;
 
+import argmentsComposer.IArgumentsComposer;
+import descriptors.IArgumentDescriptor;
+import dsl.entities.Argument;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import argmentsComposer.IArgumentsComposer;
-import descriptors.IArgumentDescriptor;
-import dsl.entities.Argument;
 
 public class TrimmomaticComposer implements IArgumentsComposer{
 		 
@@ -58,7 +58,7 @@ public class TrimmomaticComposer implements IArgumentsComposer{
 	public static final String PAIRED_MODE_NAME = "PE";
 	public static final String SINGLE_MODE_NAME = "SE";
 	
-	private static final Map<String, String> ARGS_GROUP = new HashMap<String, String>();
+	private static final Map<String, String> ARGS_GROUP = new HashMap<>();
 	
 
 	static {

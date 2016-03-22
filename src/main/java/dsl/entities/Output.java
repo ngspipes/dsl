@@ -57,7 +57,7 @@ public class Output {
 	private Consumer<String> getOnArgumentValueChanged(){ 
 		switch (descriptor.getType()) {
 			case OutputDescriptor.INDEPENDENT_TYPE: return (val) -> {};
-			case OutputDescriptor.FILE_DEPENDENT_TYPE : return (val) -> this.setValue(val);
+			case OutputDescriptor.FILE_DEPENDENT_TYPE : return this::setValue;
 			case OutputDescriptor.DIRECTORY_DEPENDENT_TYPE : return (val) -> this.setValue(val + "/" + this.initValue);
 			default : return null;
 		}
