@@ -19,17 +19,13 @@
  */
 package dsl.language;
 
-import repository.IRepository;
 import configurators.IConfigurator;
 import descriptors.IToolDescriptor;
-import dsl.entities.Argument;
-import dsl.entities.Chain;
-import dsl.entities.Command;
-import dsl.entities.Output;
-import dsl.entities.Tool;
+import dsl.entities.*;
 import dsl.managers.Support;
 import exceptions.DSLException;
 import exceptions.RepositoryException;
+import repository.IRepository;
 
 public class Pipeline {
 	
@@ -58,7 +54,7 @@ public class Pipeline {
 			}
 		}
 		
-		public PipeTool tool(IToolDescriptor toolDescriptor, IConfigurator configurator) throws DSLException {
+		public PipeTool tool(IToolDescriptor toolDescriptor, IConfigurator configurator) {
 			ctx.addTool(new Tool(toolDescriptor), configurator);
 			return new PipeTool();
 		}
@@ -225,7 +221,7 @@ public class Pipeline {
 		}
 	}
 
-	public PipeTool tool(IToolDescriptor toolDescriptor, IConfigurator configurator) throws DSLException {
+	public PipeTool tool(IToolDescriptor toolDescriptor, IConfigurator configurator) {
 		ctx.addTool(new Tool(toolDescriptor), configurator);
 		return new PipeTool();
 	}

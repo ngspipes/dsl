@@ -64,9 +64,9 @@ public class ArgumentValidator {
 	
 	private static void validateString(String value){}
 	
-	private static void validateDirectory(String value) throws ArgumentValidationException {}
+	private static void validateDirectory(String value) {}
 	
-	private static void validateFile(String value) throws ArgumentValidationException {}
+	private static void validateFile(String value) {}
 	
 	private static void validateInt(String value) throws ArgumentValidationException{
 		try {
