@@ -27,14 +27,14 @@ import dsl.entities.Command;
 public class CommandBuilderUtils {
 	
 	public static void updateArgumentsValue(Command command, String inputsDirectory, String outputsDirectory) {
-		for (Argument arg : command.getArguments()) {
+		command.getArguments().forEach((arg)->{
 			if(arg.getValue() != null && isFileOrDirectory(arg) && !isChainArgument(arg)) {
 				if(!command.getDependentsOf(arg).isEmpty())
 					arg.setValue(outputsDirectory + arg.getValue());
 				else
 					arg.setValue(inputsDirectory + arg.getValue());
 			}
-		}
+		});
 	}
 
 	private static boolean isChainArgument(Argument arg) {

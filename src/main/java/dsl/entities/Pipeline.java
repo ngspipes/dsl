@@ -104,8 +104,7 @@ public class Pipeline {
 	private Collection<IConfigurator> getConfiguratorsFor(Collection<Step> steps){
 		Collection<IConfigurator> configs = new LinkedList<>();
 
-		for(Step step : steps)
-			configs.add(step.getConfigurator());
+		steps.forEach((step)->configs.add(step.getConfigurator()));
 
 		return configs;
 	}
