@@ -19,9 +19,9 @@
  */
 package dsl.entities;
 
-import java.util.function.Consumer;
-
 import utils.Event;
+
+import java.util.function.Consumer;
 
 public class Chain {
 	
@@ -66,6 +66,9 @@ public class Chain {
 			return; 
 		
 		output.valueChangedEvent.removeListener(onOutputChange);
+
+		argument.setValue(null);
+
 		setConnected(false);
 	}
 
