@@ -39,9 +39,6 @@ public class Command {
 	
 	private final ICommandDescriptor descriptor;
 	public ICommandDescriptor getDescriptor(){ return descriptor; }
-	
-	private final IArgumentsComposer composer;
-	public IArgumentsComposer getComposer(){ return composer; }
 
 	private final List<Argument> args;
 	public List<Argument> getArguments(){ return args; }
@@ -71,7 +68,6 @@ public class Command {
 	public Command(ICommandDescriptor descriptor,Tool originTool){
 		this.originTool = originTool;
 		this.descriptor = descriptor;
-		this.composer = Support.getComposer(descriptor.getArgumentsComposer());
 		this.name = descriptor.getName();
 		this.command = descriptor.getCommand();
 		this.args = new LinkedList<>();

@@ -19,6 +19,8 @@
  */
 package dsl.entities;
 
+import argmentsComposer.IArgumentsComposer;
+import dsl.managers.Support;
 import utils.Event;
 import descriptors.IArgumentDescriptor;
 
@@ -29,7 +31,10 @@ public class Argument {
 
 	private final IArgumentDescriptor descriptor;
 	public IArgumentDescriptor getDescriptor(){ return descriptor; }
-	
+
+	private final IArgumentsComposer composer;
+	public IArgumentsComposer getComposer(){ return composer; }
+
 	private String value;
 	public String getValue(){ return value; }
 	public void setValue(String value){
@@ -44,6 +49,7 @@ public class Argument {
 		this.value = value;
 		this.valueChangedEvent = new Event<>();
 		this.originCommand = originCommand;
+		this.composer = Support.getComposer(descriptor.getArgumentComposer());
 	}
 
 	public String getName(){
