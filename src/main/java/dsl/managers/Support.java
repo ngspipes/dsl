@@ -31,9 +31,7 @@ import repository.IRepository;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Support {
@@ -80,14 +78,6 @@ public class Support {
 	public static final String COMPOSER_NAME_VALUES_SEPARATED_BY_COLON_NAME = "name_values_separated_by_colon";
 	public static final String COMPOSER_NAME_VALUES_SEPARATED_BY_HYPHEN_NAME = "name_values_separated_by_hyphen";
 	public static final String COMPOSER_NAME_VALUES_SEPARATED_BY_SPACE_NAME = "name_values_separated_by_space";
-	public static final String COMPOSER_VALUES_SEPARATED_BY_COLON_NAME = "values_separated_by_colon";
-	public static final String COMPOSER_VALUES_SEPARATED_BY_VERTICAL_BAR_NAME = "values_separated_by_vertical_bar";
-	public static final String COMPOSER_VALUES_SEPARATED_BY_HYPHEN_NAME = "values_separated_by_hyphen";
-	public static final String COMPOSER_VALUES_SEPARATED_BY_SLASH_NAME = "values_separated_by_slash";
-	public static final String COMPOSER_VALUES_SEPARATED_BY_COMMA_NAME = "values_separated_by_comma";
-	public static final String COMPOSER_TRIMMOMATIC_NAME = "trimmomatic";
-	public static final String COMPOSER_VELVETG_NAME = "velvetG";
-	public static final String VELVET_OUTPUT_DIRECTORY_ARGUMENT_NAME = "output_directory";
 
 	@SuppressWarnings("unchecked")
 	private static boolean isComposer(Method method){
@@ -98,8 +88,7 @@ public class Support {
 		return Modifier.isStatic(method.getModifiers()) && 
 				method.getReturnType().isAssignableFrom(String.class) &&
 				method.getParameters().length==1 &&
-				List.class.isAssignableFrom(method.getParameters()[0].getType()) &&
-				Argument.class.isAssignableFrom((Class<Argument>)((ParameterizedType)(method.getParameters()[0].getParameterizedType())).getActualTypeArguments()[0]) && 
+				Argument.class.isAssignableFrom(method.getParameters()[0].getType()) &&
 				method.getAnnotation(ComposerNameAnnotation.class) != null;
 	}
 

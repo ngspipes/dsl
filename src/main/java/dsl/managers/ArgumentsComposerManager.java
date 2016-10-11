@@ -20,12 +20,12 @@
 package dsl.managers;
 
 import dsl.entities.Argument;
+import exceptions.DSLException;
 import support.TrimmomaticComposer;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
-import java.util.function.Function;
 
 public class ArgumentsComposerManager {
 		
@@ -33,108 +33,68 @@ public class ArgumentsComposerManager {
 	public @interface ComposerNameAnnotation {
 		String name();
 	}
-	
-	private static String compose(List<Argument> args, Function<Argument, String> func){
+
+	public static String compose(List<Argument> args) throws DSLException {
+
+		if(args.get(0).getOriginCommand().getName().equals("trimmomatic"))
+			return trimmomatic(args);
+
 		StringBuilder sb = new StringBuilder();
-		
-		for(Argument arg : args)
-			sb.append(func.apply(arg));
-		
-		return sb.toString();
-	}
-	
-	private static String composeEndControlled(List<Argument> args, Function<Argument, String> func, Function<Argument, String> endFunc){
-		StringBuilder sb = new StringBuilder();
-		
-		for(int i=0; i<args.size()-1; ++i)
-			sb.append(func.apply(args.get(i)));
-		
-		sb.append(endFunc.apply(args.get(args.size()-1)));
-		
+		Argument arg;
+
+		for(int i=0; i<args.size()-1; ++i) {
+			arg = args.get(i);
+			sb.append(arg.getComposer().compose(arg));
+			sb.append(" ");
+		}
+
+		if(!args.isEmpty()) {
+			arg = args.get(args.size() - 1);
+			sb.append(arg.getComposer().compose(arg));
+		}
+
 		return sb.toString();
 	}
 	
 	// Format: []
 	@ComposerNameAnnotation(name = Support.COMPOSER_DUMMY_NAME)
-	public static String dummy(List<Argument> args){
+	public static String dummy(Argument arg){
 		return "";
 	}
 
-	// Format: [value value value]
+	// Format: [value]
 	@ComposerNameAnnotation(name = Support.COMPOSER_VALUES_SEPARATED_BY_SPACE_NAME)
-	public static String valuesSeparatedBySpace(List<Argument> args){
-		return compose(args, (arg)-> arg.getValue() + " ");
+	public static String valuesSeparatedBySpace(Argument arg){
+		return arg.getValue();
 	}
 	
-	// Format: [name=value name=value name=value]
+	// Format: [name=value]
 	@ComposerNameAnnotation(name = Support.COMPOSER_NAME_VALUES_SEPARATED_BY_EQUAL_NAME)
-	public static String nameValuesSeparatedByEqual(List<Argument> args){
-		return compose(args, (arg)-> arg.getName()+"="+arg.getValue()+" ");
+	public static String nameValuesSeparatedByEqual(Argument arg) {
+		return arg.getName()+"="+arg.getValue();
 	}	
 
-	// Format: [name:value name:value name:value]
+	// Format: [name:value]
 	@ComposerNameAnnotation(name = Support.COMPOSER_NAME_VALUES_SEPARATED_BY_COLON_NAME)
-	public static String nameValuesSeparatedByColon(List<Argument> args){
-		return compose(args, (arg)-> arg.getName()+":"+arg.getValue()+" "); 
+	public static String nameValuesSeparatedByColon(Argument arg) {
+		return arg.getName()+":"+arg.getValue();
 	}
 	
-	// Format: [name-value name-value name-value]
+	// Format: [name-value]
 	@ComposerNameAnnotation(name = Support.COMPOSER_NAME_VALUES_SEPARATED_BY_HYPHEN_NAME)
-	public static String nameValuesSeparatedByHyphen(List<Argument> args){
-		return compose(args, (arg)-> arg.getName()+"-"+arg.getValue()+" "); 
+	public static String nameValuesSeparatedByHyphen(Argument arg) {
+		return arg.getName()+"-"+arg.getValue();
 	}
 
-	// Format: [name value name value name value]
+	// Format: [name value]
 	@ComposerNameAnnotation(name = Support.COMPOSER_NAME_VALUES_SEPARATED_BY_SPACE_NAME)
-	public static String nameValuesSeparatedBySpace(List<Argument> args){
-		return compose(args, (arg)-> arg.getName()+" "+arg.getValue()+" "); 
+	public static String nameValuesSeparatedBySpace(Argument arg) {
+		return arg.getName()+" "+arg.getValue();
 	}
 
-	// Format: [value:value:value]
-	@ComposerNameAnnotation(name = Support.COMPOSER_VALUES_SEPARATED_BY_COLON_NAME)
-	public static String valuesSeparatedByColon(List<Argument> args){ 
-		return composeEndControlled(args, (arg)->arg.getValue()+":", Argument::getValue);
-	}
-
-	// Format: [value|value|value]
-	@ComposerNameAnnotation(name = Support.COMPOSER_VALUES_SEPARATED_BY_VERTICAL_BAR_NAME)
-	public static String valuesSeparatedByVerticalBar(List<Argument> args){ 
-		return composeEndControlled(args, (arg)->arg.getValue()+"|", Argument::getValue);
-	}
-
-	// Format: [value-value-value]
-	@ComposerNameAnnotation(name = Support.COMPOSER_VALUES_SEPARATED_BY_HYPHEN_NAME)
-	public static String valuesSeparatedByHyphen(List<Argument> args){ 
-		return composeEndControlled(args, (arg)->arg.getValue()+"-", Argument::getValue);
-	}
-
-	// Format: [value/value/value]
-	@ComposerNameAnnotation(name = Support.COMPOSER_VALUES_SEPARATED_BY_SLASH_NAME)
-	public static String valuesSeparatedBySlash(List<Argument> args){ 
-		return composeEndControlled(args, (arg)->arg.getValue()+"/", Argument::getValue);
-	}
-
-	// Format: [value,value,value]
-	@ComposerNameAnnotation(name = Support.COMPOSER_VALUES_SEPARATED_BY_COMMA_NAME)
-	public static String valuesSeparatedByComma(List<Argument> args){ 
-		return composeEndControlled(args, (arg)->arg.getValue()+",", Argument::getValue);
-	}
-	
 	// Format: [TRIMMOMATIC STYLE ArgCategory:arg:arg:arg]
-	@ComposerNameAnnotation(name = Support.COMPOSER_TRIMMOMATIC_NAME)
 	public static String trimmomatic(List<Argument> args){ 
 		return new TrimmomaticComposer().compose(args);
-	}
-	
-	// Format: [VELVETG STYLE all arguments has format [name value] except output_directory that has format [value]]
-	@ComposerNameAnnotation(name = Support.COMPOSER_VELVETG_NAME)
-	public static String velvetG(List<Argument> args){ 
-		return compose(args, (arg)-> { 
-									if(!arg.getName().equals(Support.VELVET_OUTPUT_DIRECTORY_ARGUMENT_NAME))
-										return arg.getName()+" "+arg.getValue()+" ";
-									else
-										return arg.getValue()+" ";
-									}); 		
 	}
 
 }

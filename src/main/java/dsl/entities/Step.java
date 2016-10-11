@@ -25,6 +25,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import dsl.managers.ArgumentsComposerManager;
 import progressReporter.IProgressReporter;
 import utils.Event;
 
@@ -90,7 +91,7 @@ public class Step {
 
 		List<Argument> arguments = arrangeArguments();
 
-		String cmd = command.getCommand() + " " + command.getComposer().compose(arguments);
+		String cmd = command.getCommand() + " " + ArgumentsComposerManager.compose(arguments);
 
 		reporter.reportInfo("Executing : " + cmd);
 

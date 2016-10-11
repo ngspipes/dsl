@@ -19,7 +19,6 @@
  */
 package support;
 
-import argmentsComposer.IArgumentsComposer;
 import descriptors.IArgumentDescriptor;
 import dsl.entities.Argument;
 
@@ -29,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class TrimmomaticComposer implements IArgumentsComposer{
+public class TrimmomaticComposer {
 		 
 	public static final String WITHOUT_GROUP_NAME = "";
 	public static final String ILLUMINACLIP_GROUP_NAME = "ILLUMINACLIP";
@@ -141,8 +140,7 @@ public class TrimmomaticComposer implements IArgumentsComposer{
 		return sb.toString().substring(0, sb.length()-":".length());
 	}
 
-	
-	@Override
+
 	public String compose(List<Argument> args){
 		Map<String, Map<String, Argument>> arguments = convertToGroupMap(args);
 		

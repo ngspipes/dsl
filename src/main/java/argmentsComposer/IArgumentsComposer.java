@@ -27,6 +27,6 @@ import exceptions.DSLException;
 @FunctionalInterface
 public interface IArgumentsComposer {
 	
-	String compose(List<Argument> args) throws DSLException;
+	String compose(Argument arg) throws DSLException;
 	
 }
