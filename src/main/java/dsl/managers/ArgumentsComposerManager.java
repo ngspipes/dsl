@@ -36,7 +36,7 @@ public class ArgumentsComposerManager {
 
 	public static String compose(List<Argument> args) throws DSLException {
 
-		if(args.get(0).getOriginCommand().getName().equals("trimmomatic"))
+		if(!args.isEmpty() && args.get(0).getOriginCommand().getName().equals("trimmomatic"))
 			return trimmomatic(args);
 
 		StringBuilder sb = new StringBuilder();
