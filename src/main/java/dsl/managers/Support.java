@@ -78,6 +78,7 @@ public class Support {
 	public static final String COMPOSER_NAME_VALUES_SEPARATED_BY_COLON_NAME = "name_values_separated_by_colon";
 	public static final String COMPOSER_NAME_VALUES_SEPARATED_BY_HYPHEN_NAME = "name_values_separated_by_hyphen";
 	public static final String COMPOSER_NAME_VALUES_SEPARATED_BY_SPACE_NAME = "name_values_separated_by_space";
+	public static final String COMPOSER_NAME_VALUES_SEPARATED_BY_EQUAL_AND_BACKSLASH_NAME = "name_values_separated_by_equal_and_backslash";
 
 	@SuppressWarnings("unchecked")
 	private static boolean isComposer(Method method){

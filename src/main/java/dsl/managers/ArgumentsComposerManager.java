@@ -92,6 +92,12 @@ public class ArgumentsComposerManager {
 		return arg.getName()+" "+arg.getValue();
 	}
 
+	// Format: [\ name=value]
+	@ComposerNameAnnotation(name = Support.COMPOSER_NAME_VALUES_SEPARATED_BY_EQUAL_AND_BACKSLASH_NAME)
+	public static String nameValuesSeparatedByEqualAndBackslash(Argument arg){
+		return "\\ " + arg.getName()+"="+arg.getValue();
+	}
+
 	// Format: [TRIMMOMATIC STYLE ArgCategory:arg:arg:arg]
 	public static String trimmomatic(List<Argument> args){ 
 		return new TrimmomaticComposer().compose(args);
