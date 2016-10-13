@@ -34,6 +34,7 @@ public class DockerUbuntuBuilder implements ICommandBuilder{
 	private static final String INPUT_VOLUMECOMMAND = "-v " + VM_INPUT_DIRECTORY_PATH + ":" + SHARE_INPUT_DIRECTORY_PATH + ":rw";
 	private static final String SEPARATOR = " ";
 	private static final String DOCKER_RUN_COMMAND = "docker run";
+	private static final String DOCKER_WORK_DIR = "-w " + SHARE_OUTPUT_DIRECTORY_PATH;
 
 
 	private final String IMAGE_NAME;
@@ -50,6 +51,7 @@ public class DockerUbuntuBuilder implements ICommandBuilder{
 
 			StringBuilder runnableCommand = new StringBuilder(UBUNTU_ROOT_COMMAND);
 			runnableCommand .append(SEPARATOR).append(DOCKER_RUN_COMMAND).append(SEPARATOR)
+							.append(DOCKER_WORK_DIR).append(SEPARATOR)
 							.append(INPUT_VOLUMECOMMAND).append(SEPARATOR)
 							.append(OUTPUT_VOLUMECOMMAND).append(SEPARATOR).append(IMAGE_NAME)
 							.append(SEPARATOR).append(command.getCommand());
