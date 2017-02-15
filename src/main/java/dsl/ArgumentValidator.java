@@ -49,6 +49,7 @@ public class ArgumentValidator {
 	public static final String FILE_TYPE_NAME = "file";
 	public static final String DOUBLE_TYPE_NAME = "double";
 	public static final String DIRECTORY_TYPE_NAME = "directory";
+	public static final String FLAG_TYPE_NAME = "flag";
 	
 	public static final Map<String, Validator> VALIDATORS;
 	
@@ -60,8 +61,10 @@ public class ArgumentValidator {
 		VALIDATORS.put(FILE_TYPE_NAME, ArgumentValidator::validateFile);
 		VALIDATORS.put(DOUBLE_TYPE_NAME, ArgumentValidator::validateDouble);
 		VALIDATORS.put(DIRECTORY_TYPE_NAME, ArgumentValidator::validateDirectory);
+		VALIDATORS.put(FLAG_TYPE_NAME, ArgumentValidator::validateFlag);
 	}
-	
+
+
 	private static void validateString(String value){}
 	
 	private static void validateDirectory(String value) {}
@@ -80,10 +83,14 @@ public class ArgumentValidator {
 		try {
 			Double.parseDouble(value);
 		} catch (Exception e) {
-			throw new ArgumentValidationException(value + " is not an Float value!");
+			throw new ArgumentValidationException(value + " is not a Float value!");
 		}
 	}
-	
+
+	private static void validateFlag(String value) throws ArgumentValidationException {
+		if(!value.isEmpty())
+			throw new ArgumentValidationException(value + " is not a Flag value");
+	}
 	
 	public static void validate(Argument argument) throws ArgumentValidationException {
 		Validator validator = ArgumentValidator.VALIDATORS.get(argument.getType());
