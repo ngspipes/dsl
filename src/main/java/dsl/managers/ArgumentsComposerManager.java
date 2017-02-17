@@ -209,7 +209,7 @@ public class ArgumentsComposerManager {
 	public static String samtools(List<Argument> args){
 		StringBuilder sb = new StringBuilder();
 		for (Argument arg :	args) {
-			if(arg.getType().equals("self-sufficient"))
+			if(arg.getType().equals("flag"))
 				sb.append(arg.getName()).append(" ");
 			else {
 				if(arg.getName().equals("input"))
