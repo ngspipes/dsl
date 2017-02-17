@@ -74,6 +74,7 @@ public class Support {
 	//ARGUMENTS COMPOSER
 	public static final String COMPOSER_DUMMY_NAME = "dummy";
 	public static final String COMPOSER_VALUES_SEPARATED_BY_SPACE_NAME = "values_separated_by_space";
+	public static final String COMPOSER_NAMES_SEPARATED_BY_SPACE_NAME = "names_separated_by_space";
 	public static final String COMPOSER_NAME_VALUES_SEPARATED_BY_EQUAL_NAME = "name_values_separated_by_equal";
 	public static final String COMPOSER_NAME_VALUES_SEPARATED_BY_COLON_NAME = "name_values_separated_by_colon";
 	public static final String COMPOSER_NAME_VALUES_SEPARATED_BY_HYPHEN_NAME = "name_values_separated_by_hyphen";

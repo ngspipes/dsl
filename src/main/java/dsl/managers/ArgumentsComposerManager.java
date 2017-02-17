@@ -93,6 +93,13 @@ public class ArgumentsComposerManager {
 	public static String valuesSeparatedBySpace(Argument arg){
 		return arg.getValue();
 	}
+
+
+	// Format: [value]
+	@ComposerNameAnnotation(name = Support.COMPOSER_NAMES_SEPARATED_BY_SPACE_NAME)
+	public static String namesSeparatedBySpace(Argument arg){
+		return arg.getName();
+	}
 	
 	// Format: [name=value]
 	@ComposerNameAnnotation(name = Support.COMPOSER_NAME_VALUES_SEPARATED_BY_EQUAL_NAME)

@@ -88,7 +88,7 @@ public class ArgumentValidator {
 	}
 
 	private static void validateFlag(String value) throws ArgumentValidationException {
-		if(!value.isEmpty())
+		if(!value.equals("NA"))
 			throw new ArgumentValidationException(value + " is not a Flag value");
 	}
 	
